@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Formulario de Registro de Árbol</title>
+<style>
+  :root{
+    --bg:#eaf6ea;
+    --ink:#1f2a1f;
+    --muted:#546154;
+    --panel:#ffffff;
+    --ring:#dde7dd;
+    --brand:#2e7d32;
+    --brand-ink:#ffffff;
+    --topbar:#56a05a;
+    --sidebar:#2f7a35;
+    --sidebar-ink:#eef7ee;
+    --shadow:0 8px 24px rgba(0,0,0,.06), 0 2px 6px rgba(0,0,0,.05);
+    --r:14px;
+  }
+
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.45;
+  }
+
+  /* Layout general */
+  .app{
+    min-height:100%;
+    display:grid;
+    grid-template-columns:240px 1fr;
+    grid-template-rows:56px auto;
+    grid-template-areas:
+      "sidebar topbar"
+      "sidebar main";
+  }
+
+  /* Sidebar */
+  .sidebar{
+    grid-area:sidebar;
+    background:var(--sidebar);
+    color:var(--sidebar-ink);
+    padding:22px 18px;
+  }
+  .nav{
+    display:flex; flex-direction:column; gap:12px; margin-top:4px;
+  }
+  .nav a{
+    color:var(--sidebar-ink);
+    text-decoration:none;
+    padding:10px 12px;
+    border-radius:10px;
+    font-weight:600;
+  }
+  .nav a:hover{ background:rgba(255,255,255,.10); }
+
+  /* Topbar */
+  .topbar{
+    grid-area:topbar;
+    background:var(--topbar);
+    color:#fff;
+    display:flex; align-items:center;
+    padding:10px 24px;
+    font-weight:800;
+  }
+
+  /* Main centrado */
+  .main{ grid-area:main; padding:18px 20px 24px; }
+  .container{
+    width:min(1120px,100%);
+    margin-inline:auto;                       /* CENTRADO */
+  }
+
+  /* Tarjeta de formulario */
+  .card{
+    background:#f2faf2;
+    border:1px solid var(--ring);
+    border-radius:12px;
+    box-shadow:var(--shadow);
+    padding:18px;
+  }
+  .inner{
+    background:var(--panel);
+    border:1px solid var(--ring);
+    border-radius:12px;
+    padding:22px clamp(16px,3.5vw,34px);
+  }
+
+  .title{
+    margin:0 0 14px;
+    font-weight:900;
+    color:var(--brand);
+    font-size:clamp(22px,3.2vw,34px);
+    letter-spacing:.2px;
+  }
+
+  /* Secciones */
+  .section{
+    margin:16px 0;
+  }
+  .section h2{
+    margin:0 0 8px;
+    font-size:22px;
+    color:#2f692f;
+    font-weight:900;
+  }
+
+  /* Lista de pares término/valor */
+  dl{ margin:0; display:grid; grid-template-columns: 260px 1fr; row-gap:6px; }
+  dt{ font-weight:700; color:#2d3a2d; }
+  dd{ margin:0; color:#223122; }
+
+  /* Botones */
+  .actions{
+    display:flex; gap:16px; flex-wrap:wrap;
+    margin-top:20px;
+  }
+  .btn{
+    appearance:none; border:0; cursor:pointer;
+    padding:12px 22px; border-radius:12px;
+    font-weight:800; font:inherit;
+    transition:.15s ease filter, .02s transform;
+  }
+  .btn:active{ transform:translateY(1px); }
+
+  .btn-primary{
+    background:var(--brand); color:var(--brand-ink);
+    box-shadow:0 6px 18px color-mix(in oklab, var(--brand) 25%, transparent);
+  }
+  .btn-outline{
+    background:#fbfffb; color:var(--brand);
+    border:2px solid #bcd8bc;
+  }
+  .btn-ghost{
+    background:#fbfffb; color:#3a4a3a;
+    border:2px solid #dfe6df;
+  }
+
+  /* Footer */
+  .footer{
+    margin-top:14px;
+    background:#e3ebe3;
+    border:1px solid var(--ring);
+    border-radius:10px;
+    padding:10px 14px;
+    color:#4e5b4e; font-size:14px; text-align:center;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px){
+    dl{ grid-template-columns:1fr; }
+  }
+  @media (max-width:760px){
+    .app{
+      grid-template-columns:1fr;
+      grid-template-rows:56px auto auto;
+      grid-template-areas:
+        "topbar"
+        "sidebar"
+        "main";
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="nav" aria-label="Menú">
+        <a href="#">Inicio</a>
+        <a href="#">Conglomerados</a>
+        <a href="#">Subparcelas</a>
+        <a href="#">Árboles</a>
+        <a href="#">Especies</a>
+        <a href="#">Reportes</a>
+        <a href="#">Usuarios</a>
+      </nav>
+    </aside>
+
+    <!-- Topbar -->
+    <header class="topbar">Inventario Forestal Nacional</header>
+
+    <!-- Main centrado -->
+    <main class="main">
+      <div class="container">
+        <div class="card">
+          <div class="inner">
+            <h1 class="title">Formulario de Registro de Árbol</h1>
+
+            <section class="section">
+              <h2>Identificación</h2>
+              <dl>
+                <dt>Conglomerado:</dt><dd>CGL-01</dd>
+                <dt>Subparcela:</dt><dd>SP-01</dd>
+                <dt>Nº Árbol:</dt><dd>A-0001</dd>
+                <dt>Fecha:</dt><dd>2025-08-31</dd>
+              </dl>
+            </section>
+
+            <section class="section">
+              <h2>Especie</h2>
+              <dl>
+                <dt>Nombre científico:</dt><dd>Cedrela odorata</dd>
+                <dt>Nombre común:</dt><dd>Cedro rosado</dd>
+                <dt>Familia:</dt><dd>Meliaceae</dd>
+              </dl>
+            </section>
+
+            <section class="section">
+              <h2>Mediciones</h2>
+              <dl>
+                <dt>DAP:</dt><dd>35 cm</dd>
+                <dt>Altura total:</dt><dd>18 m</dd>
+                <dt>Altura comercial:</dt><dd>12 m</dd>
+              </dl>
+            </section>
+
+            <section class="section">
+              <h2>Condición</h2>
+              <dl>
+                <dt>Estado fitosanitario:</dt><dd>Sano</dd>
+                <dt>Forma del fuste:</dt><dd>Recto</dd>
+                <dt>Observaciones:</dt><dd>Ninguna</dd>
+              </dl>
+            </section>
+
+            <div class="actions" role="toolbar" aria-label="Acciones del formulario">
+              <button class="btn btn-primary" type="button">Guardar</button>
+              <button class="btn btn-outline" type="button">Guardar y nuevo</button>
+              <button class="btn btn-ghost" type="button">Cancelar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">© 2025 Proyecto académico – Universidad XYZ</div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
