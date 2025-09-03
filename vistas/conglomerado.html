@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Conglomerados</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #e9ffd7;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .content {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #4b8c1d;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 30px 15px;
+    }
+
+    .sidebar button {
+      background-color: #e8ffd8;
+      border: none;
+      padding: 15px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .header {
+      background-color: #7cd000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      border-bottom: 3px solid #6cb000;
+    }
+
+    .header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .filters {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .filters input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      width: 200px;
+    }
+
+    .table-container {
+      flex: 1;
+      margin-top: 20px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    table thead {
+      background-color: #7cd000;
+      color: #fff;
+    }
+
+    table th, table td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .table-actions {
+      margin-top: 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .table-actions button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .btn-pdf {
+      background-color: #611e6a;
+    }
+
+    .btn-delete {
+      background-color: #2f5c41;
+    }
+
+    .footer {
+      background-color: #4b8c1d;
+      color: #fff;
+      text-align: center;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Encabezado -->
+    <div class="header">
+      <div class="logo">
+        <img src="https://raw.githubusercontent.com/SIB-Colombia/logos/main/socio-SiB-ideam.png" alt="Logo">
+        <h1>Conglomerados</h1>
+      </div>
+      <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Usuario">
+    </div>
+
+    <!-- Contenido -->
+    <div class="content">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <button>Inicio</button>
+        <button>Parcelas</button>
+        <button>Conglomerados</button>
+      </div>
+
+      <!-- Main -->
+      <div class="main">
+        <!-- Tabla -->
+        <div class="table-container">
+          <h2>Registro de Conglomerados</h2>
+
+          <!-- Filtros -->
+          <div class="filters">
+            <input type="text" id="filterPalabra" placeholder="Buscar por palabra clave...">
+            <input type="text" id="filterCodigo" placeholder="Buscar por código...">
+            <input type="text" id="filterID" placeholder="Buscar por ID...">
+          </div>
+
+          <table id="conglomeradosTable">
+            <thead>
+              <tr>
+                <th><input type="checkbox" id="selectAll"></th>
+                <th>ID</th>
+                <th>Código</th>
+                <th>Nombre del Conglomerado</th>
+                <th>Ubicación</th>
+                <th>Fecha de Registro</th>
+                <th>Observaciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" class="row-select"></td>
+                <td>1</td>
+                <td>CG-2001</td>
+                <td>Conglomerado Experimental Los Andes</td>
+                <td>Cundinamarca</td>
+                <td>2025-09-02</td>
+                <td>Conglomerado en buen estado</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="row-select"></td>
+                <td>2</td>
+                <td>CG-2002</td>
+                <td>Reserva Natural El Cedral</td>
+                <td>Meta</td>
+                <td>2025-08-28</td>
+                <td>Incluye nuevas parcelas</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="row-select"></td>
+                <td>3</td>
+                <td>CG-2010</td>
+                <td>Conglomerado Bosque Seco Tropical</td>
+                <td>Huila</td>
+                <td>2025-08-20</td>
+                <td>Requiere mantenimiento</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Botones de acción -->
+          <div class="table-actions">
+            <button class="btn-pdf" onclick="generarPDF()">Generar PDF</button>
+            <button class="btn-delete" onclick="eliminarFilas()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      © 2025 - Dashboard Conglomerados IFN Colombia | Todos los derechos reservados
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    const filterPalabra = document.getElementById("filterPalabra");
+    const filterCodigo = document.getElementById("filterCodigo");
+    const filterID = document.getElementById("filterID");
+    const table = document.getElementById("conglomeradosTable").getElementsByTagName("tbody")[0];
+
+    function filtrarTabla() {
+      const palabra = filterPalabra.value.toLowerCase();
+      const codigo = filterCodigo.value.toLowerCase();
+      const id = filterID.value.toLowerCase();
+
+      for (let row of table.rows) {
+        const textRow = row.innerText.toLowerCase();
+        const colCodigo = row.cells[2].innerText.toLowerCase();
+        const colID = row.cells[1].innerText.toLowerCase();
+
+        const coincidePalabra = palabra === "" || textRow.includes(palabra);
+        const coincideCodigo = codigo === "" || colCodigo.includes(codigo);
+        const coincideID = id === "" || colID.includes(id);
+
+        row.style.display = (coincidePalabra && coincideCodigo && coincideID) ? "" : "none";
+      }
+    }
+
+    filterPalabra.addEventListener("input", filtrarTabla);
+    filterCodigo.addEventListener("input", filtrarTabla);
+    filterID.addEventListener("input", filtrarTabla);
+  </script>
+</body>
+</html>

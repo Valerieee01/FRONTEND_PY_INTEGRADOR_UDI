@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #e9ffd7;
+    }
+
+    /* Layout principal */
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* Sidebar + Contenido */
+    .content {
+      display: flex;
+      flex: 1;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background-color: #4b8c1d;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 30px 15px;
+    }
+
+    .sidebar button {
+      background-color: #e8ffd8;
+      border: none;
+      padding: 15px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    /* Main */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    /* Encabezado */
+    .header {
+      background-color: #7cd000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      border-bottom: 3px solid #6cb000;
+    }
+
+    .header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    /* Filtros */
+    .filters {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .filters input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      width: 200px;
+    }
+
+    /* Tabla */
+    .table-container {
+      flex: 1;
+      margin-top: 20px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    table thead {
+      background-color: #7cd000;
+      color: #fff;
+    }
+
+    table th, table td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Botones */
+    .table-actions {
+      margin-top: 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .table-actions button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .btn-pdf {
+      background-color: #611e6a;
+    }
+
+    .btn-delete {
+      background-color: #2f5c41;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #4b8c1d;
+      color: #fff;
+      text-align: center;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Encabezado -->
+    <div class="header">
+      <div class="logo">
+        <img src="https://raw.githubusercontent.com/SIB-Colombia/logos/main/socio-SiB-ideam.png" alt="Logo">
+        <h1> Parcelas</h1>
+      </div>
+      <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Usuario">
+    </div>
+
+    <!-- Contenido -->
+    <div class="content">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <button>Inicio</button>
+        <button>Parcelas</button>
+        <button>Conglomerados</button>
+      </div>
+
+      <!-- Main -->
+      <div class="main">
+        <!-- Tabla -->
+        <div class="table-container">
+          <h2>Registro de Parcelas</h2>
+
+          <!-- Filtros -->
+          <div class="filters">
+            <input type="text" id="filterPalabra" placeholder="Buscar por palabra clave...">
+            <input type="text" id="filterCodigo" placeholder="Buscar por código...">
+            <input type="text" id="filterParcela" placeholder="Buscar por parcela...">
+          </div>
+
+          <table id="parcelasTable">
+            <thead>
+              <tr>
+                <th><input type="checkbox" id="selectAll"></th>
+                <th>ID</th>
+                <th>Código</th>
+                <th>Subparcela</th>
+                <th>Nombre de Parcela</th>
+                <th>Fecha de Registro</th>
+                <th>Observaciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" class="row-select"></td>
+                <td>1</td>
+                <td>UPM-1023</td>
+                <td>Subparcela 2 (Este)</td>
+                <td>Parcelación Experimental Los Andes</td>
+                <td>2025-09-02</td>
+                <td>Parcela en buen estado</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="row-select"></td>
+                <td>2</td>
+                <td>UPM-1024</td>
+                <td>Subparcela 1 (Oeste)</td>
+                <td>Reserva Natural El Cedral</td>
+                <td>2025-08-28</td>
+                <td>Se observaron nuevas especies</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="row-select"></td>
+                <td>3</td>
+                <td>UPM-1050</td>
+                <td>Subparcela 3 (Norte)</td>
+                <td>Parcela Bosque Seco Tropical</td>
+                <td>2025-08-20</td>
+                <td>Requiere mantenimiento</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Botones de acción -->
+          <div class="table-actions">
+            <button class="btn-pdf" onclick="generarPDF()">Generar PDF</button>
+            <button class="btn-delete" onclick="eliminarFilas()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      © 2025 - Dashboard Parcelas IFN Colombia | Todos los derechos reservados
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  <script>
+    const filterPalabra = document.getElementById("filterPalabra");
+    const filterCodigo = document.getElementById("filterCodigo");
+    const filterParcela = document.getElementById("filterParcela");
+    const table = document.getElementById("parcelasTable").getElementsByTagName("tbody")[0];
+
+    function filtrarTabla() {
+      const palabra = filterPalabra.value.toLowerCase();
+      const codigo = filterCodigo.value.toLowerCase();
+      const parcela = filterParcela.value.toLowerCase();
+
+      for (let row of table.rows) {
+        const textRow = row.innerText.toLowerCase();
+        const colCodigo = row.cells[2].innerText.toLowerCase();
+        const colParcela = row.cells[4].innerText.toLowerCase();
+
+        const coincidePalabra = palabra === "" || textRow.includes(palabra);
+        const coincideCodigo = codigo === "" || colCodigo.includes(codigo);
+        const coincideParcela = parcela === "" || colParcela.includes(parcela);
+
+        row.style.display = (coincidePalabra && coincideCodigo && coincideParcela) ? "" : "none";
+      }
+    }
+
+    filterPalabra.addEventListener("input", filtrarTabla);
+    filterCodigo.addEventListener("input", filtrarTabla);
+    filterParcela.addEventListener("input", filtrarTabla);
+
+  </script>
+</body>
+</html>
+
+
