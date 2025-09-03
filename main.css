@@ -1,0 +1,20 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+--bg: #eaf6ea;
+--card-bg:#ffffff;
+--ink:#1f2a1f;
+--muted:#6b776b;
+--primary:#2e7d32;
+--primary-ink:#ffffff;
+--input-bg:#ffffff;
+--input-bd:#d9e1d9;
+--input-bd-focus:#2e7d32;
+--shadow: 0 10px 30px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.05);
+--radius:16px;
+}

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Inventario Forestal Nacional — Inicio de sesión</title>
+<link rel="stylesheet" href="estilosSesion.css">
+</head>
+<body>
+  <main class="page">
+    <section class="card" role="dialog" aria-labelledby="titulo">
+      <header class="header">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1 class="title" id="titulo">Inventario Forestal Nacional</h1>
+          <p class="subtitle">Aplicativo • Inicio de sesión</p>
+        </div>
+      </header>
+
+      <form action="#" method="post" autocomplete="on" novalidate>
+        <div>
+          <label for="correo">Correo</label>
+          <input id="correo" name="email" type="email" class="input" placeholder="usuario@ejemplo.com" required />
+        </div>
+
+        <div>
+          <label for="clave">Contraseña</label>
+          <input id="clave" name="password" type="password" class="input" placeholder="••••••••" required />
+        </div>
+
+        <div class="row">
+          <label class="checkbox">
+            <input type="checkbox" name="remember" />
+            Recordarme
+          </label>
+          <a href="#" target="_self" rel="nofollow">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Ingresar</button>
+
+        <div class="divider">o</div>
+
+        <button type="button" class="btn btn-ghost">Ingresar con cuenta institucional</button>
+      </form>
+
+      <p class="footer">© 2025 Inventario Forestal XYZ</p>
+    </section>
+  </main>
+</body>
+</html>
