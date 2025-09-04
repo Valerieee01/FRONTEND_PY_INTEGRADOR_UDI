@@ -1,166 +1,418 @@
-  :root{
-    --bg: #eaf6ea;
-    --card-bg:#ffffff;
-    --ink:#1f2a1f;
-    --muted:#6b776b;
-    --primary:#2e7d32;
-    --primary-ink:#ffffff;
-    --input-bg:#ffffff;
-    --input-bd:#d9e1d9;
-    --input-bd-focus:#2e7d32;
-    --shadow: 0 10px 30px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.05);
-    --radius:16px;
-  }
+:root {
+  /* Selector raíz del documento para definir variables CSS (custom properties) */
+  --bg: #eaf6ea;
+  /* Color de fondo general de la página */
+  --card-bg: #ffffff;
+  /* Color de fondo de las tarjetas (card) */
+  --ink: #1f2a1f;
+  /* Color principal del texto */
+  --muted: #6b776b;
+  /* Color de texto atenuado (subtítulos, detalles) */
+  --primary: #2e7d32;
+  /* Color primario de marca (verde) */
+  --primary-ink: #ffffff;
+  /* Color del texto sobre fondos primarios */
+  --input-bg: #ffffff;
+  /* Color de fondo de los inputs */
+  --input-bd: #d9e1d9;
+  /* Color del borde de los inputs en estado normal */
+  --input-bd-focus: #2e7d32;
+  /* Color del borde de los inputs cuando tienen foco */
+  --shadow: 0 10px 30px rgba(0, 0, 0, .08), 0 2px 8px rgba(0, 0, 0, .05);
+  /* Sombra usada en tarjetas */
+  --radius: 16px;
+  /* Radio de borde estándar para esquinas redondeadas */
+}
 
-  /* Página */
-  body{
-    margin:0;
-    font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
-    color:var(--ink);
-    background:var(--bg);
-    line-height:1.35;
-  }
-  .page{
-    min-height:100svh;
-    display:grid;
-    place-items:center;
-    padding:24px;
-  }
+/* Fin de :root */
 
-  /* Tarjeta centrada */
-  .card{
-    width:min(640px, 100%);
-    background:var(--card-bg);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-    padding:28px min(5vw,36px) 24px;
-  }
+/* Página */
+body {
+  /* Estilos base del cuerpo del documento */
+  margin: 0;
+  /* Elimina márgenes por defecto del body */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  /* Pila tipográfica moderna y segura */
+  color: var(--ink);
+  /* Color de texto principal usando variable */
+  background: var(--bg);
+  /* Color de fondo general usando variable */
+  line-height: 1.35;
+  /* Altura de línea para mejorar legibilidad */
+}
 
-  /* Encabezado con logo + títulos */
-  .header{
-    display:grid;
-    grid-template-columns:64px 1fr;
-    gap:16px;
-    align-items:center;
-    margin-bottom:18px;
-  }
-  .logo{
-    width:64px; height:64px;
-    border-radius:12px;
-    background:#e3f0e7;
-    border:1px solid #d9e6dd;
-  }
-  .title{
-    margin:0;
-    color:var(--primary);
-    font-weight:800;
-    letter-spacing:.2px;
-    font-size:clamp(22px, 3.2vw, 34px);
-  }
-  .subtitle{
-    margin:.25rem 0 0 0;
-    color:var(--muted);
-    font-size:clamp(13px, 1.6vw, 16px);
-  }
+.page {
+  /* Contenedor principal centrado vertical y horizontalmente */
+  min-height: 100svh;
+  /* Altura mínima igual a la altura de la ventana (svh = small viewport height) */
+  display: grid;
+  /* Usa grid para centrar contenido */
+  place-items: center;
+  /* Centra contenido en ambos ejes (atajo de align-items + justify-items) */
+  padding: 24px;
+  /* Espaciado interno para respiración en bordes */
+}
 
-  /* Formulario */
-  form{
-    display:grid;
-    gap:14px;
-    margin-top:8px;
-  }
-  label{
-    font-size:14px;
-    font-weight:600;
-  }
-  .input{
-    margin-top:6px;
-    display:block;
-    width:100%;
-    font:inherit;
-    color:inherit;
-    padding:13px 14px;
-    border-radius:12px;
-    border:1px solid var(--input-bd);
-    background:var(--input-bg);
-    outline:none;
-    transition:border-color .15s ease, box-shadow .15s ease;
-  }
-  .input:focus{
-    border-color:var(--input-bd-focus);
-    box-shadow:0 0 0 3px color-mix(in oklab, var(--primary) 20%, transparent);
-  }
+/* Tarjeta centrada */
+.card {
+  /* Tarjeta que envuelve el formulario */
+  width: min(640px, 100%);
+  /* Ancho máximo 640px, pero nunca más ancho que el viewport */
+  background: var(--card-bg);
+  /* Fondo de tarjeta (blanco) */
+  border-radius: var(--radius);
+  /* Esquinas redondeadas */
+  box-shadow: var(--shadow);
+  /* Sombra para efecto de elevación */
+  padding: 28px min(5vw, 36px) 24px;
+  /* Espaciado interno (superior, laterales fluidos, inferior) */
+}
 
-  /* Fila recordar + link */
-  .row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-top:4px;
-  }
-  .checkbox{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-size:14px;
-    color:var(--ink);
-  }
-  a{
-    color:var(--primary);
-    text-decoration:none;
-    font-weight:600;
-  }
-  a:hover{ text-decoration:underline; }
+/* Encabezado con logo + títulos */
+.header {
+  /* Contenedor del logo y los títulos */
+  display: grid;
+  /* Usamos grid para alinear logo y texto */
+  grid-template-columns: 64px 1fr;
+  /* Columna fija para logo (64px) y flexible para textos */
+  gap: 16px;
+  /* Separación entre columnas */
+  align-items: center;
+  /* Alinea verticalmente al centro */
+  margin-bottom: 18px;
+  /* Espacio inferior respecto al resto del contenido */
+}
 
-  /* Botones */
-  .btn{
-    display:inline-block;
-    width:100%;
-    border:0;
-    border-radius:12px;
-    padding:14px 16px;
-    font:inherit;
-    font-weight:800;
-    cursor:pointer;
-    transition:transform .02s ease, filter .15s ease, box-shadow .15s ease;
-  }
-  .btn:active{ transform:translateY(1px); }
-  .btn-primary{
-    background:var(--primary);
-    color:var(--primary-ink);
-    box-shadow:0 6px 18px color-mix(in oklab, var(--primary) 25%, transparent);
-  }
-  .btn-primary:hover{ filter:brightness(1.03); }
+.logo {
+  /* Contenedor del logo */
+  width: 64px;
+  height: 64px;
+  /* Dimensiones cuadradas del área del logo */
+  border-radius: 12px;
+  /* Bordes redondeados */
+  background: #e3f0e7;
+  /* Color de fondo del contenedor de logo */
+  border: 1px solid #d9e6dd;
+  /* Borde sutil alrededor del logo */
+}
 
-  .btn-ghost{
-    background:#f6faf6;
-    color:var(--primary);
-    border:1px solid #d7ead7;
-    font-weight:700;
-  }
+.logo-img {
+  /* Imagen dentro del contenedor de logo */
+  width: 100%;
+  /* Ocupa todo el ancho del contenedor */
+  height: 100%;
+  /* Ocupa todo el alto del contenedor */
+}
 
-  /* Separador “— o —” */
-  .divider{
-    display:grid;
-    grid-template-columns:1fr auto 1fr;
-    align-items:center;
-    gap:10px;
-    margin:8px 0;
-    color:var(--muted);
-    font-weight:600;
-  }
-  .divider::before,
-  .divider::after{
-    content:"";
-    height:1px;
-    background:#e3ebe3;
-  }
+.title {
+  /* Título principal del login */
+  margin: 0;
+  /* Sin márgenes */
+  color: var(--primary);
+  /* Color de marca (verde) */
+  font-weight: 800;
+  /* Peso de fuente muy marcado (negrita) */
+  letter-spacing: .2px;
+  /* Pequeño espaciado entre letras */
+  font-size: clamp(22px, 3.2vw, 34px);
+  /* Tamaño fluido: mínimo 22px, máximo 34px */
+}
 
-  /* Pie */
-  .footer{
-    margin-top:18px;
-    color:var(--muted);
-    font-size:13px;
-    text-align:center;
-  }
+.subtitle {
+  /* Subtítulo bajo el título principal */
+  margin: .25rem 0 0 0;
+  /* Pequeño margen superior, sin márgenes laterales o inferior */
+  color: var(--muted);
+  /* Color atenuado para contraste suave */
+  font-size: clamp(13px, 1.6vw, 16px);
+  /* Tamaño fluido para responsive */
+}
+
+/* Formulario */
+form {
+  /* Contenedor del formulario */
+  display: grid;
+  /* Usar grid para separar filas de campos */
+  gap: 14px;
+  /* Espacio vertical entre elementos del formulario */
+  margin-top: 8px;
+  /* Separación respecto al encabezado */
+}
+
+label {
+  /* Etiquetas de los campos */
+  font-size: 14px;
+  /* Tamaño de fuente de la etiqueta */
+  font-weight: 600;
+  /* Seminegrita para claridad */
+}
+
+.input {
+  /* Estilo común para los inputs */
+  margin-top: 6px;
+  /* Separación con respecto al label */
+  display: block;
+  /* Se comporta como bloque para ocupar todo el ancho */
+  width: 100%;
+  /* Ocupa todo el ancho del contenedor */
+  font: inherit;
+  /* Hereda tipografía del contenedor */
+  color: inherit;
+  /* Hereda color del texto */
+  padding: 13px 14px;
+  /* Espaciado interno cómodo */
+  border-radius: 12px;
+  /* Bordes redondeados */
+  border: 1px solid var(--input-bd);
+  /* Borde base del input */
+  background: var(--input-bg);
+  /* Fondo del input (blanco) */
+  outline: none;
+  /* Quita el contorno de foco por defecto del navegador */
+  transition: border-color .15s ease, box-shadow .15s ease;
+  /* Transiciones suaves en foco/borde */
+}
+
+.input:focus {
+  /* Estado cuando el input tiene foco */
+  border-color: var(--input-bd-focus);
+  /* Cambia color de borde a primario */
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 20%, transparent);
+  /* Anillo de foco accesible */
+}
+
+/* Fila recordar + link */
+.row {
+  /* Fila que contiene checkbox "Recordarme" y el enlace "Olvidaste..." */
+  display: flex;
+  /* Disposición en línea horizontal */
+  align-items: center;
+  /* Alinea verticalmente al centro */
+  justify-content: space-between;
+  /* Separa elementos a extremos (izquierda/derecha) */
+  gap: 10px;
+  /* Espacio entre elementos si se colapsan */
+  margin-top: 4px;
+  /* Separación superior respecto al campo anterior */
+}
+
+.checkbox {
+  /* Estilo del grupo checkbox + texto */
+  display: flex;
+  /* Disposición en línea */
+  align-items: center;
+  /* Centrar verticalmente input y texto */
+  gap: 8px;
+  /* Separación entre el checkbox y el texto */
+  font-size: 14px;
+  /* Tamaño del texto "Recordarme" */
+  color: var(--ink);
+  /* Color del texto */
+}
+
+a {
+  /* Estilo base de todos los enlaces dentro de este scope */
+  color: var(--primary);
+  /* Color del texto del enlace (primario) */
+  text-decoration: none;
+  /* Quita subrayado por defecto */
+  font-weight: 600;
+  /* Seminegrita para destacar enlace */
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Al pasar el cursor, subraya el enlace */
+
+/* Botones */
+.btn {
+  /* Clase base para botones */
+  display: inline-block;
+  /* Se comporta como bloque en línea */
+  width: 100%;
+  /* Ocupa todo el ancho del contenedor (botones full-width) */
+  border: 0;
+  /* Sin borde por defecto */
+  border-radius: 12px;
+  /* Bordes redondeados */
+  padding: 14px 16px;
+  /* Espaciado interno adecuado */
+  font: inherit;
+  /* Hereda tipografía base */
+  font-weight: 800;
+  /* Texto en negrita para botón */
+  cursor: pointer;
+  /* Cursor de mano para indicar acción */
+  transition: transform .02s ease, filter .15s ease, box-shadow .15s ease;
+  /* Transiciones de interacción */
+}
+
+.btn {
+  /* Reglas extra para .btn */
+  text-decoration: none;
+  /* Sin subrayado si el botón fuera un enlace estilizado */
+  justify-content: center;
+  /* Centrado de contenido (si se usa como flex) */
+  align-items: center;
+  /* Centrado vertical (si se usa como flex) */
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Pequeño “hundimiento” visual al presionar el botón */
+.btn-primary {
+  /* Botón de acción principal */
+  background: var(--primary);
+  /* Fondo verde de marca */
+  color: var(--primary-ink);
+  /* Texto blanco sobre fondo primario */
+  box-shadow: 0 6px 18px color-mix(in oklab, var(--primary) 25%, transparent);
+  /* Sombra coloreada */
+}
+
+.btn-primary:hover {
+  filter: brightness(1.03);
+}
+
+/* En hover, incrementa levemente el brillo */
+
+.btn-ghost {
+  /* Botón estilo “fantasma” (ligero) */
+  background: #f6faf6;
+  /* Fondo muy claro */
+  color: var(--primary);
+  /* Texto en color primario */
+  border: 1px solid #d7ead7;
+  /* Borde suave */
+  font-weight: 700;
+  /* Seminegrita */
+}
+
+/* Separador “— o —” */
+.divider {
+  /* Contenedor del separador con el texto “o” */
+  display: grid;
+  /* Grid para colocar líneas y texto central */
+  grid-template-columns: 1fr auto 1fr;
+  /* Dos columnas flex para líneas y una central para el texto */
+  align-items: center;
+  /* Centrado vertical de las líneas y el texto */
+  gap: 10px;
+  /* Separación entre elementos */
+  margin: 8px 0;
+  /* Margen vertical superior e inferior */
+  color: var(--muted);
+  /* Color del texto “o” */
+  font-weight: 600;
+  /* Seminegrita para el separador */
+}
+
+.divider::before,
+/* Pseudo elemento antes del texto del separador */
+.divider::after {
+  /* Pseudo elemento después del texto del separador */
+  content: "";
+  /* Contenido vacío para dibujar línea */
+  height: 1px;
+  /* Altura de la línea */
+  background: #e3ebe3;
+  /* Color de la línea */
+}
+
+/* Pie */
+.footer {
+  /* Texto de pie de tarjeta/página */
+  margin-top: 18px;
+  /* Separación con el contenido anterior */
+  color: var(--muted);
+  /* Color atenuado para el pie */
+  font-size: 13px;
+  /* Tamaño de fuente más pequeño */
+  text-align: center;
+  /* Centrado del texto */
+}
+
+/* Agrupador de campos + mensajes */
+.field {
+  display: block;
+}
+
+/* Envoltura de cada campo para agrupar input + hint */
+.field .hint {
+  /* Mensaje de ayuda/validación bajo cada campo */
+  display: block;
+  /* Mostrar en bloque, ocupa toda la línea */
+  margin-top: 6px;
+  /* Separación respecto al input */
+  font-size: .9rem;
+  /* Texto un poco más pequeño que el normal */
+  color: #5c6b5c;
+  /* Color neutro del hint cuando no hay error */
+}
+
+/* Estado de error */
+.invalid .input {
+  /* Estilo del input cuando su contenedor .field está en error */
+  border-color: #c0392b;
+  /* Cambia color de borde a rojo (error) */
+  box-shadow: 0 0 0 3px color-mix(in oklab, #c0392b 20%, transparent);
+  /* Anillo de foco/alerta rojo suave */
+  background: #fff;
+  /* Mantiene fondo blanco para legibilidad */
+}
+
+.invalid .hint {
+  color: #c0392b;
+}
+
+/* El texto de hint se vuelve rojo al estar inválido */
+
+/* Input de contraseña con botón de mostrar/ocultar */
+.password-wrap {
+  /* Contenedor del input de contraseña y el botón de ojo */
+  position: relative;
+  /* Necesario para posicionar el botón de ojo de forma absoluta */
+  display: grid;
+  /* Grid simple (permite comportamiento flexible) */
+}
+
+.password-wrap .toggle-pass {
+  /* Botón (icono) para mostrar/ocultar contraseña */
+  position: absolute;
+  /* Posición absoluta dentro de .password-wrap */
+  right: 10px;
+  /* Separación desde el borde derecho del contenedor */
+  top: 50%;
+  /* A mitad de altura del contenedor */
+  transform: translateY(-50%);
+  /* Ajuste para centrar verticalmente exactamente */
+  border: 0;
+  /* Sin borde */
+  background: transparent;
+  /* Fondo transparente para que no parezca un botón clásico */
+  cursor: pointer;
+  /* Muestra mano al pasar el cursor */
+  font-size: 18px;
+  /* Tamaño del icono de ojo */
+  line-height: 1;
+  /* Altura de línea compacta */
+  opacity: .75;
+  /* Opacidad menor para que no compita con el input */
+}
+
+.password-wrap .toggle-pass:hover {
+  opacity: 1;
+}
+
+/* En hover, icono completamente opaco */
+
+/* Un pelín más de aire al form en pantallas grandes */
+.card form {
+  gap: 16px;
+}
+
+/* Incrementa el espacio entre filas del formulario dentro de la tarjeta */

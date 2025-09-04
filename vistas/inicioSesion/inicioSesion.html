@@ -1,50 +1,83 @@
-<!doctype html>
-<html lang="es">
+<!doctype html> <!-- Declaración del tipo de documento HTML5 -->
+<html lang="es"> <!-- Documento en español -->
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Inventario Forestal Nacional — Inicio de sesión</title>
-<link rel="stylesheet" href="estilosSesion.css">
+  <meta charset="utf-8" /> <!-- Codificación de caracteres (UTF-8) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Ajuste responsivo para móviles -->
+  <title>Inventario Forestal Nacional — Inicio de sesión</title> <!-- Título de la pestaña -->
+  <link rel="stylesheet" href="estilosSesion.css"> <!-- Hoja de estilos externa para el login -->
 </head>
 <body>
+  <!-- Contenedor principal centrado en pantalla -->
   <main class="page">
+    
+    <!-- Tarjeta que contiene el login -->
     <section class="card" role="dialog" aria-labelledby="titulo">
+      
+      <!-- Encabezado con logo e identificadores -->
       <header class="header">
-        <div class="logo" aria-hidden="true"></div>
+        <!-- Logo institucional -->
+        <div class="logo" aria-hidden="true">
+          <img class="logo-img" src="/vistas/img/ideam-logo.jpg" alt="">
+        </div>
+        <!-- Texto: título y subtítulo -->
         <div>
           <h1 class="title" id="titulo">Inventario Forestal Nacional</h1>
           <p class="subtitle">Aplicativo • Inicio de sesión</p>
         </div>
       </header>
 
-      <form action="#" method="post" autocomplete="on" novalidate>
-        <div>
+      <!-- Formulario de login -->
+      <form id="form-login" autocomplete="on" novalidate>
+        
+        <!-- Campo de correo -->
+        <div class="field">
           <label for="correo">Correo</label>
-          <input id="correo" name="email" type="email" class="input" placeholder="usuario@ejemplo.com" required />
+          <input id="correo" name="email" type="text" class="input" 
+                 placeholder="usuario@ejemplo.com" 
+                 aria-describedby="correo-hint" aria-invalid="false" />
+          <!-- Texto de ayuda o error dinámico -->
+          <small id="correo-hint" class="hint" role="alert"></small>
         </div>
 
-        <div>
+        <!-- Campo de contraseña con botón de mostrar/ocultar -->
+        <div class="field">
           <label for="clave">Contraseña</label>
-          <input id="clave" name="password" type="password" class="input" placeholder="••••••••" required />
+          <div class="password-wrap">
+            <input id="clave" name="password" type="password" class="input" 
+                   placeholder="••••••••" 
+                   aria-describedby="clave-hint" aria-invalid="false" />
+            <!-- Botón con icono de ojo para alternar visibilidad -->
+            <button type="button" class="toggle-pass" aria-label="Mostrar/ocultar contraseña">👁️</button>
+          </div>
+          <!-- Texto de ayuda o error dinámico -->
+          <small id="clave-hint" class="hint" role="alert"></small>
         </div>
 
+        <!-- Fila con checkbox "Recordarme" y enlace de recuperación -->
         <div class="row">
           <label class="checkbox">
-            <input type="checkbox" name="remember" />
+            <input type="checkbox" id="remember" name="remember" />
             Recordarme
           </label>
           <a href="#" target="_self" rel="nofollow">¿Olvidaste tu contraseña?</a>
         </div>
 
-        <button type="submit" class="btn btn-primary">Ingresar</button>
+        <!-- Botón principal para enviar el formulario -->
+        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
 
+        <!-- Separador visual con texto "o" -->
         <div class="divider">o</div>
 
+        <!-- Botón alternativo para login con cuenta institucional -->
         <button type="button" class="btn btn-ghost">Ingresar con cuenta institucional</button>
       </form>
 
-      <p class="footer">© 2025 Inventario Forestal XYZ</p>
+      <!-- Pie de la tarjeta con derechos de autor -->
+      <p class="footer">© 2025 Inventario Forestal Nacional</p>
     </section>
   </main>
+
+  <!-- Archivo JS externo con validaciones personalizadas -->
+  <script src="validaciones.js"></script>
 </body>
 </html>

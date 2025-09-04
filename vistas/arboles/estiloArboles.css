@@ -1,161 +1,392 @@
+:root {
+  /* Ámbito raíz para variables CSS (custom properties) */
+  --bg: #eaf6ea;
+  /* Color de fondo base de la app */
+  --ink: #1f2a1f;
+  /* Color principal del texto */
+  --muted: #546154;
+  /* Color de texto secundario/muted */
+  --panel: #ffffff;
+  /* Color de paneles/tarjetas internas */
+  --ring: #dfe7df;
+  /* Color de bordes/separadores claros */
+  --brand: #2e7d32;
+  /* Color de marca (verde principal) */
+  --brand-ink: #ffffff;
+  /* Texto sobre el color de marca */
+  --topbar: #56a05a;
+  /* Color de la barra superior */
+  --sidebar: #2f7a35;
+  /* Color del sidebar */
+  --sidebar-ink: #eef7ee;
+  /* Texto/íconos sobre el sidebar */
+  --shadow: 0 8px 24px rgba(0, 0, 0, .06), 0 2px 6px rgba(0, 0, 0, .05);
+  /* Sombra suave para tarjetas */
+  --r: 14px;
+  /* Radio base para bordes redondeados */
+  --danger: #c0392b;
+  /* Color para estados de error/alerta */
+}
 
-  :root{
-    --bg:#eaf6ea;
-    --ink:#1f2a1f;
-    --muted:#546154;
-    --panel:#ffffff;
-    --ring:#dde7dd;
-    --brand:#2e7d32;
-    --brand-ink:#ffffff;
-    --topbar:#56a05a;
-    --sidebar:#2f7a35;
-    --sidebar-ink:#eef7ee;
-    --shadow:0 8px 24px rgba(0,0,0,.06), 0 2px 6px rgba(0,0,0,.05);
-    --r:14px;
+html,
+body {
+  height: 100%
+}
+
+/* Hace que html y body ocupen toda la altura de la ventana */
+body {
+  margin: 0;
+  /* Elimina margen por defecto del body */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial;
+  /* Pila tipográfica moderna */
+  color: var(--ink);
+  /* Color de texto por defecto */
+  background: var(--bg);
+  /* Color de fondo general */
+  line-height: 1.45;
+  /* Altura de línea cómoda para lectura */
+}
+
+/* Layout */
+.app {
+  min-height: 100%;
+  /* Asegura que el contenedor ocupe al menos el alto de la ventana */
+  display: grid;
+  /* Usa CSS Grid para el layout */
+  grid-template-columns: 240px 1fr;
+  /* Columna fija para sidebar y flexible para contenido */
+  grid-template-rows: 56px auto;
+  /* Fila para topbar y otra para el resto */
+  grid-template-areas:
+    /* Define las áreas con nombre para facilitar el posicionamiento */
+    "sidebar topbar"
+    "sidebar main";
+}
+
+.sidebar {
+  grid-area: sidebar;
+  /* Asigna este bloque al área 'sidebar' */
+  background: var(--sidebar);
+  /* Fondo del sidebar */
+  color: var(--sidebar-ink);
+  /* Color de texto en sidebar */
+  padding: 22px 18px;
+  /* Espaciado interno */
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px
+}
+
+/* Navegación vertical con separación entre enlaces */
+.nav a {
+  color: var(--sidebar-ink);
+  text-decoration: none;
+  /* Color de los enlaces y sin subrayado */
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  /* Click area amplia, bordes redondos y texto seminegrita */
+}
+
+.nav a:hover {
+  background: rgba(255, 255, 255, .10);
+}
+
+/* Resalta el enlace al pasar el mouse con un fondo tenue */
+
+.topbar {
+  grid-area: topbar;
+  /* Asigna al área 'topbar' */
+  background: var(--topbar);
+  /* Color de fondo de la barra superior */
+  color: #fff;
+  /* Texto blanco en la topbar */
+  display: flex;
+  align-items: center;
+  padding: 10px 24px;
+  /* Centrado vertical y espaciado interno */
+  font-weight: 800;
+  letter-spacing: .2px;
+  /* Título/branding más marcado */
+}
+
+.main {
+  grid-area: main;
+  padding: 18px 20px 24px;
+}
+
+/* Área principal con padding */
+.container {
+  width: min(1120px, 100%);
+  margin-inline: auto;
+}
+
+/* centrado */
+/* Contenedor centrado con ancho máximo */
+
+/* Tarjeta */
+.card {
+  background: #f2faf2;
+  /* Fondo muy claro (verde pálido) para diferenciar del fondo de la página */
+  border: 1px solid var(--ring);
+  /* Borde sutil alrededor */
+  border-radius: 12px;
+  /* Bordes redondeados */
+  box-shadow: var(--shadow);
+  /* Sombras suaves para elevar la tarjeta */
+  padding: 18px;
+  /* Espaciado interno */
+}
+
+.inner {
+  background: var(--panel);
+  /* Fondo blanco para el contenido interno */
+  border: 1px solid var(--ring);
+  /* Borde interno sutil */
+  border-radius: 12px;
+  /* Bordes redondeados consistentes */
+  padding: 22px clamp(16px, 3.5vw, 34px);
+  /* Padding con lado horizontal fluido (responsive) */
+}
+
+.title {
+  margin: 0 0 14px;
+  /* Sin margen arriba, 14px abajo */
+  font-weight: 900;
+  color: var(--brand);
+  /* Título en negrita fuerte y color de marca */
+  font-size: clamp(22px, 3.2vw, 34px);
+  /* Tamaño fluido: mínimo 22px, máximo 34px */
+  letter-spacing: .2px;
+  /* Ligerísimo espaciado entre letras */
+}
+
+/* Secciones */
+.section {
+  margin: 16px 0;
+}
+
+/* Separación vertical entre secciones */
+.section h2 {
+  margin: 0 0 10px;
+  /* Sin margen arriba, 10px abajo */
+  font-size: 22px;
+  color: #2f692f;
+  font-weight: 900;
+  /* Subtítulos destacados en verde oscuro */
+}
+
+/* Grid de campos usando <dl> */
+dl {
+  margin: 0;
+}
+
+/* Quita margen por defecto del <dl> */
+.grid-2 {
+  display: grid;
+  /* Grid para etiquetas/inputs en 2 columnas */
+  grid-template-columns: 260px 1fr;
+  /* Columna izquierda fija (labels) y derecha flexible (inputs) */
+  gap: 10px 18px;
+  /* Espaciado entre filas y columnas */
+}
+
+dt {
+  font-weight: 700;
+  color: #2d3a2d;
+  align-self: center;
+}
+
+/* Etiquetas con peso y color, centradas verticalmente */
+dd {
+  margin: 0;
+}
+
+/* Quita margen por defecto del <dd> */
+
+/* Inputs bonitos */
+input,
+select,
+textarea {
+  width: 100%;
+  /* Los campos ocupan todo el ancho disponible */
+  box-sizing: border-box;
+  /* Incluye borde y padding en el cálculo del ancho */
+  font: inherit;
+  color: inherit;
+  /* Heredan tipografía y color del contenedor */
+  background: #fff;
+  /* Fondo blanco para los inputs */
+  border: 1.5px solid #d9e5d9;
+  /* Borde suave verdoso */
+  border-radius: 12px;
+  /* Bordes redondeados acordes al resto del diseño */
+  padding: 12px 14px;
+  /* Espaciado interno cómodo */
+  outline: none;
+  /* Quita el outline por defecto (lo reemplazamos con box-shadow) */
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+  /* Transiciones suaves en foco */
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #8da18d;
+}
+
+/* Color del placeholder tenue */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--brand);
+  /* Borde en color de marca al enfocar */
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand) 20%, transparent);
+  /* Anillo de foco accesible (soporta color-mix) */
+  background: #fbfffb;
+  /* Fondo ligeramente más claro al foco */
+}
+
+/* Hints y errores */
+.req {
+  color: var(--brand);
+  margin-left: 4px;
+}
+
+/* Asterisco o marca para campos requeridos */
+.hint {
+  display: block;
+  /* Ocupa línea completa bajo el input */
+  margin-top: 6px;
+  /* Separación del input */
+  font-size: .9rem;
+  /* Tamaño un poco menor que el cuerpo */
+  color: #5c6b5c;
+  /* Color de ayuda neutro */
+}
+
+.invalid .hint {
+  color: var(--danger);
+}
+
+/* Mensaje de ayuda en rojo cuando hay error */
+.invalid input,
+.invalid select,
+.invalid textarea {
+  border-color: var(--danger);
+  /* Borde rojo para campos inválidos */
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--danger) 20%, transparent);
+  /* Anillo de error */
+}
+
+/* Botones */
+.actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+/* Contenedor de botones, con separación y wrap en móviles */
+.btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  /* Resetea estilo nativo y muestra cursor de botón */
+  padding: 12px 22px;
+  border-radius: 12px;
+  /* Tamaño cómodo y bordes redondeados */
+  font-weight: 800;
+  font: inherit;
+  /* Texto en negrita y tipografía heredada */
+  transition: .15s ease filter, .02s transform, box-shadow .15s ease;
+  /* Transiciones sutiles al interactuar */
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Pequeño “hundimiento” al presionar */
+.btn-primary {
+  background: var(--brand);
+  color: var(--brand-ink);
+  /* Botón principal: verde con texto blanco */
+  box-shadow: 0 6px 18px color-mix(in oklab, var(--brand) 25%, transparent);
+  /* Sombra acorde al color de marca */
+}
+
+.btn-primary:hover {
+  filter: brightness(1.03);
+}
+
+/* Aclara un poco al pasar el mouse */
+.btn-outline {
+  background: #fbfffb;
+  color: var(--brand);
+  /* Botón contorneado: fondo claro y texto verde */
+  border: 2px solid #bcd8bc;
+  /* Borde visible en tono verde claro */
+}
+
+.btn-ghost {
+  background: #fbfffb;
+  color: #3a4a3a;
+  /* Botón “ghost”: muy ligero */
+  border: 2px solid #dfe6df;
+  /* Borde gris-verdoso suave */
+}
+
+/* Footer */
+.footer {
+  margin-top: 14px;
+  /* Separación del contenido anterior */
+  background: #e3ebe3;
+  /* Fondo gris verdoso claro */
+  border: 1px solid var(--ring);
+  /* Borde sutil */
+  border-radius: 10px;
+  /* Bordes redondeados */
+  padding: 10px 14px;
+  /* Espaciado interno */
+  color: #4e5b4e;
+  font-size: 14px;
+  text-align: center;
+  /* Texto del footer */
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+
+  /* Reglas cuando el ancho de la ventana es 900px o menos */
+  .grid-2 {
+    grid-template-columns: 1fr;
   }
 
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial;
-    color:var(--ink);
-    background:var(--bg);
-    line-height:1.45;
+  /* Pasa el formulario a 1 columna (labels arriba) */
+  dt {
+    align-self: unset;
   }
 
-  /* Layout general */
-  .app{
-    min-height:100%;
-    display:grid;
-    grid-template-columns:240px 1fr;
-    grid-template-rows:56px auto;
+  /* Restablece el alineado vertical de labels */
+}
+
+@media (max-width:760px) {
+
+  /* Reglas para móviles/anchos muy pequeños */
+  .app {
+    grid-template-columns: 1fr;
+    /* Quita la columna fija del sidebar; todo en una columna */
+    grid-template-rows: 56px auto auto;
+    /* Fila para topbar y luego sidebar y main */
     grid-template-areas:
-      "sidebar topbar"
-      "sidebar main";
+      "topbar"
+      /* Muestra topbar primero */
+      "sidebar"
+      /* Sidebar ahora debajo del topbar */
+      "main";
+    /* Contenido principal al final */
   }
-
-  /* Sidebar */
-  .sidebar{
-    grid-area:sidebar;
-    background:var(--sidebar);
-    color:var(--sidebar-ink);
-    padding:22px 18px;
-  }
-  .nav{
-    display:flex; flex-direction:column; gap:12px; margin-top:4px;
-  }
-  .nav a{
-    color:var(--sidebar-ink);
-    text-decoration:none;
-    padding:10px 12px;
-    border-radius:10px;
-    font-weight:600;
-  }
-  .nav a:hover{ background:rgba(255,255,255,.10); }
-
-  /* Topbar */
-  .topbar{
-    grid-area:topbar;
-    background:var(--topbar);
-    color:#fff;
-    display:flex; align-items:center;
-    padding:10px 24px;
-    font-weight:800;
-  }
-
-  /* Main centrado */
-  .main{ grid-area:main; padding:18px 20px 24px; }
-  .container{
-    width:min(1120px,100%);
-    margin-inline:auto;                       /* CENTRADO */
-  }
-
-  /* Tarjeta de formulario */
-  .card{
-    background:#f2faf2;
-    border:1px solid var(--ring);
-    border-radius:12px;
-    box-shadow:var(--shadow);
-    padding:18px;
-  }
-  .inner{
-    background:var(--panel);
-    border:1px solid var(--ring);
-    border-radius:12px;
-    padding:22px clamp(16px,3.5vw,34px);
-  }
-
-  .title{
-    margin:0 0 14px;
-    font-weight:900;
-    color:var(--brand);
-    font-size:clamp(22px,3.2vw,34px);
-    letter-spacing:.2px;
-  }
-
-  /* Secciones */
-  .section{
-    margin:16px 0;
-  }
-  .section h2{
-    margin:0 0 8px;
-    font-size:22px;
-    color:#2f692f;
-    font-weight:900;
-  }
-
-  /* Lista de pares término/valor */
-  dl{ margin:0; display:grid; grid-template-columns: 260px 1fr; row-gap:6px; }
-  dt{ font-weight:700; color:#2d3a2d; }
-  dd{ margin:0; color:#223122; }
-
-  /* Botones */
-  .actions{
-    display:flex; gap:16px; flex-wrap:wrap;
-    margin-top:20px;
-  }
-  .btn{
-    appearance:none; border:0; cursor:pointer;
-    padding:12px 22px; border-radius:12px;
-    font-weight:800; font:inherit;
-    transition:.15s ease filter, .02s transform;
-  }
-  .btn:active{ transform:translateY(1px); }
-
-  .btn-primary{
-    background:var(--brand); color:var(--brand-ink);
-    box-shadow:0 6px 18px color-mix(in oklab, var(--brand) 25%, transparent);
-  }
-  .btn-outline{
-    background:#fbfffb; color:var(--brand);
-    border:2px solid #bcd8bc;
-  }
-  .btn-ghost{
-    background:#fbfffb; color:#3a4a3a;
-    border:2px solid #dfe6df;
-  }
-
-  /* Footer */
-  .footer{
-    margin-top:14px;
-    background:#e3ebe3;
-    border:1px solid var(--ring);
-    border-radius:10px;
-    padding:10px 14px;
-    color:#4e5b4e; font-size:14px; text-align:center;
-  }
-
-  /* Responsive */
-  @media (max-width: 900px){
-    dl{ grid-template-columns:1fr; }
-  }
-  @media (max-width:760px){
-    .app{
-      grid-template-columns:1fr;
-      grid-template-rows:56px auto auto;
-      grid-template-areas:
-        "topbar"
-        "sidebar"
-        "main";
-    }
-  }
+}
