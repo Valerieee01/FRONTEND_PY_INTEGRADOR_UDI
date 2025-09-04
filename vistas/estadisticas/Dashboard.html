@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Inventario Forestal — Dashboard con gráficos</title>
+<!-- Chart.js (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="estilosDashboard.css">
+</head>
+<body>
+<div class="app">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <nav class="nav" aria-label="Menú">
+      <a href="#">Inicio</a><a href="#">Conglomerados</a><a href="#">Subparcelas</a>
+      <a href="#">Árboles</a><a href="#">Especies</a><a href="#">Reportes</a><a href="#">Usuarios</a>
+    </nav>
+  </aside>
+
+  <!-- Topbar -->
+  <header class="topbar">Inventario Forestal Nacional</header>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="container">
+
+      <!-- KPIs -->
+      <section class="kpis">
+        <article class="kpi"><h4>Total Conglomerados</h4><p class="value">3</p></article>
+        <article class="kpi"><h4>Total Subparcelas</h4><p class="value">6</p></article>
+        <article class="kpi"><h4>Total Árboles</h4><p class="value">15</p></article>
+        <article class="kpi"><h4>Total Especies</h4><p class="value">5</p></article>
+      </section>
+
+      <!-- Widgets con gráficos -->
+      <section class="widgets">
+        <article class="widget">
+          <h3>Gráfico de barras – Top 3 especies</h3>
+          <canvas id="barTopEspecies" height="140"></canvas>
+        </article>
+
+        <article class="widget">
+          <h3>Gráfico circular – Estado fitosanitario</h3>
+          <canvas id="pieEstado" height="140"></canvas>
+        </article>
+      </section>
+
+      <!-- Tabla -->
+      <section class="table-card" aria-label="Últimos registros">
+        <table>
+          <thead>
+            <tr>
+              <th>Conglomerado</th><th>Subparcela</th><th>Especie</th>
+              <th>DAP (cm)</th><th>Altura (m)</th><th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>CGL-01</td><td>SP-01</td><td>Cedrela odorata</td><td>35</td><td>18</td><td>Sano</td></tr>
+            <tr><td>CGL-01</td><td>SP-02</td><td>Quercus humboldtii</td><td>28</td><td>15</td><td>Enfermo</td></tr>
+            <tr><td>CGL-02</td><td>SP-01</td><td>Pinus patula</td><td>40</td><td>22</td><td>Sano</td></tr>
+            <tr><td>CGL-02</td><td>SP-02</td><td>Cedrela odorata</td><td>25</td><td>12</td><td>Muerto</td></tr>
+            <tr><td>CGL-03</td><td>SP-01</td><td>Quercus humboldtii</td><td>30</td><td>16</td><td>Sano</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="footer">© 2025 Proyecto académico – Universidad XYZ</div>
+    </div>
+  </main>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
