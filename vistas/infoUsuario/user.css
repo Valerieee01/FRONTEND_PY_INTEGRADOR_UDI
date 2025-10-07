@@ -1,0 +1,434 @@
+:root {
+  --bg: #eaf6ea;
+  --ink: #1f2a1f;
+  --muted: #546154;
+  --panel: #ffffff;
+  --brand: #2e7d32;
+  --danger: #c0392b;
+  --gap: 16px;
+  --radius: 12px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, .06), 0 2px 6px rgba(0, 0, 0, .05);
+  --topbar: #56a05a;
+  --sidebar: #2f7a35;
+  --sidebar-ink: #eef7ee;
+  --accent: #0284c7;
+  /* Azul para editar */
+}
+
+/* Estilos globales */
+html,
+body {
+  height: 100%
+}
+
+
+body {
+  margin: 0;
+  font-family: var(--font-sans, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.45;
+}
+
+/* Layout principal de la aplicación */
+.app {
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  grid-template-rows: 56px auto;
+  grid-template-areas:
+    "sidebar topbar"
+    "sidebar main";
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background: var(--sidebar);
+  color: var(--sidebar-ink);
+  padding: 22px 18px;
+}
+
+.topbar {
+  grid-area: topbar;
+  background: var(--topbar);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 10px 24px;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.container {
+  grid-area: main;
+  padding: 18px 20px 24px;
+  width: min(1200px, 100%);
+  margin-inline: auto;
+}
+
+.container h1 {
+  color: var(--brand);
+  margin: 0 0 18px 0;
+  font-weight: 800;
+  font-size: 2rem;
+}
+
+/* Navegación lateral */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px
+}
+
+.nav a {
+  color: var(--sidebar-ink);
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav a:hover {
+  background: rgba(255, 255, 255, .10);
+}
+
+.nav a.active-nav {
+    background: rgba(255, 255, 255, .20); /* Color para el elemento activo */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+/* Estilos adicionales para el botón de Cerrar Sesión */
+.logout-btn {
+    /* Reiniciar estilos de botón */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    border: none;
+    background: none;
+    cursor: pointer;
+    
+    /* Estilos de texto y color */
+    color: var(--sidebar-ink);
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: inherit; /* Heredar el tamaño de fuente */
+    
+    transition: background-color 0.15s ease;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 255, 255, .15); /* Ligeramente más oscuro en hover */
+}
+
+/* Titulo principal*/
+.page h1 {
+    text-align: center;
+    color: var(--brand);
+    margin: 0 0 18px 0;
+    font-weight: 800;
+}
+
+/* Trajeta del formulario */
+.form-card {
+    background: var(--panel);
+    padding: 18px;
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    margin: 10px auto 22px auto;
+    max-width: 980px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.form-card h2 {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    color: var(--brand);
+}
+
+/* grid para los campos del formulario */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--gap);
+}
+
+.form-grid .full {
+    grid-column: 1 / -1;
+}
+
+/*etiquetas de los campos*/
+.form-card label {
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+    color: #314432;
+    margin-bottom: 6px;
+}
+
+/*campos inputs más compactos*/
+.form-card input,
+.form-card select,
+.form-card textarea {
+    width: 100%;
+    padding: 9px 10px;
+    border: 1px solid #d8e6d8;
+    border-radius: 8px;
+    background: #fbfffb;
+    font-size: 14px;
+    color: var(--text);
+    transition: box-shadow .12s ease, border-color .12s ease, transform .06s ease;
+}
+
+.form-card input:focus,
+.form-card select:focus,
+.form-card textarea:focus {
+    outline: none;
+    border-color: rgba(46, 125, 50, 0.85);
+    box-shadow: var(--ring);
+    transform: translateY(-1px);
+}
+
+/*botones del formulario*/
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 0;
+    cursor: pointer;
+    font-weight: 700;
+    color: #fff;
+}
+
+.btn-primary {
+    background: var(--brand);
+    box-shadow: 0 6px 14px rgba(46, 125, 50, 0.12);
+}
+
+.btn-secondary {
+    background: #6b776b;
+}
+
+/*Sección de filtros */
+.filters-section {
+    max-width: 1200px;
+    margin: 0 auto 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/*botón de filtros */
+.filter-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(180deg, #ffffff, #f4fff4);
+    border: 1px solid rgba(46, 125, 50, 0.14);
+    color: var(--brand);
+    padding: 9px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    width: 260px;
+    box-shadow: 0 6px 18px rgba(46, 125, 50, 0.06);
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+
+.filter-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(46, 125, 50, 0.08);
+}
+
+.filter-toggle svg {
+    opacity: .9;
+}
+
+.filter-toggle .chev {
+    margin-left: auto;
+    color: #6b776b;
+}
+
+/*Panel de filtros */
+.filters-panel {
+    margin-top: 6px;
+    background: var(--panel);
+    border: 1px solid #e6f1e6;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(10, 20, 10, 0.04);
+}
+
+/* grid de filtros*/
+.filters-form .filter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.filters-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+/* tabla de registros */
+.table-card {
+    max-width: 1200px;
+    margin: 0 auto 36px;
+}
+
+.table-container {
+    background: var(--panel);
+    padding: 14px;
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 720px;
+}
+
+thead th {
+    text-align: left;
+    padding: 10px 12px;
+    background: linear-gradient(180deg, var(--brand), #1f5f26);
+    color: #fff;
+    font-weight: 700;
+    position: sticky;
+    top: 0;
+}
+
+tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eef3ee;
+    vertical-align: middle;
+}
+
+tr:hover td {
+    background: #fbfff7;
+}
+
+.actions-cell {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.action-btn {
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 0;
+    cursor: pointer;
+    font-weight: 700;
+    color: #fff;
+    font-size: 13px;
+}
+
+.edit-btn {
+    background: var(--accent);
+}
+
+.cancel-btn {
+    background: var(--danger);
+}
+
+.view-btn {
+    background: #4caf50;
+}
+
+.anulado td {
+    background: #fff0f0 !important;
+    color: #6b4b4b
+}
+
+/* Detalles del árbol */
+.modal {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(10, 10, 10, 0.45);
+    z-index: 9999;
+}
+
+.modal-content {
+    width: min(720px, 95%);
+    background: var(--panel);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 18px 40px rgba(10, 20, 10, 0.2);
+    position: relative;
+}
+
+.modal-body {
+    margin-top: 8px;
+    max-height: 60vh;
+    overflow: auto;
+    padding-right: 8px;
+}
+
+.modal-close {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.modal-body dt {
+    font-weight: 700;
+    color: #2f552f;
+    margin-top: 8px;
+}
+
+.modal-body dd {
+    margin: 4px 0 10px 0;
+    color: #243322;
+}
+
+/* responsive */
+@media (max-width:900px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-form .filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-toggle {
+        width: 100%;
+    }
+}
+
+.modal[hidden] {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Modificado para que aplique a <a> y al nuevo <span> (nav-item) */
+.nav a.active-nav, .nav .nav-item.active-nav {
+    background: rgba(255, 255, 255, .20); /* Fondo ligeramente más claro */
+    /* Puedes añadir más estilos, como un color diferente o una sombra */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}

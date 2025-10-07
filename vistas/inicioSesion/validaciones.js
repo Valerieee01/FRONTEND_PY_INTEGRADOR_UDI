@@ -1,107 +1,71 @@
-// ===========================
-// Validación JS (sin HTML5)
-// ===========================
-
 // Espera a que todo el DOM esté cargado antes de ejecutar el script
 document.addEventListener('DOMContentLoaded', () => {
 
     // Obtiene referencias a los elementos clave del formulario
-    const form = document.getElementById('form-login');  // formulario
-    const correo = document.getElementById('correo');    // input de correo
-    const clave = document.getElementById('clave');      // input de contraseña
-
-    // "emailRegex" mal nombrado, aquí se guarda un string fijo.
-    // Nota: no es un regex, se usa para comparar contra un valor fijo de correo.
-    const emailRegex = "pruebas@dominio.co";
-
-    // -----------------------------
-    // Función para mostrar errores
-    // -----------------------------
-    function setError(input, message) {
-        const wrap = input.closest('.field');      // obtiene el contenedor .field
-        const hint = wrap.querySelector('.hint');  // busca el <small> para mensajes
-        wrap.classList.add('invalid');             // aplica clase de error (rojo)
-        input.setAttribute('aria-invalid', 'true'); // marca el input como inválido (accesibilidad)
-        hint.textContent = message || 'Campo inválido'; // muestra el mensaje
+    const form = document.getElementById('form-login');
+    const correoInput = document.getElementById('correo');
+    const claveInput = document.getElementById('clave');
+    const errorMessage = document.getElementById('login-error-message');
+    
+    // Función para simular la carga de usuarios desde la "base de datos" (localStorage)
+    function loadUsersForLogin() {
+        const storedUsers = localStorage.getItem('ifn_usuarios');
+        return storedUsers ? JSON.parse(storedUsers) : [];
     }
 
-    // -----------------------------
-    // Función para limpiar errores
-    // -----------------------------
-    function clearError(input) {
-        const wrap = input.closest('.field');      // obtiene el contenedor .field
-        const hint = wrap.querySelector('.hint');  // busca el <small> para mensajes
-        wrap.classList.remove('invalid');          // quita clase de error
-        input.setAttribute('aria-invalid', 'false');// marca el input como válido
-        hint.textContent = '';                     // borra mensaje de error
-    }
-
-    // -----------------------------
-    // Validación del correo
-    // -----------------------------
-    function validateCorreo() {
-        const v = correo.value.trim();             // obtiene valor sin espacios
-        if (!v) {                                  // si está vacío
-            setError(correo, 'Este campo es obligatorio');
-            return false;
-        }
-        // Debería ser algo como: if (v !== emailRegex) { ... }
-        if (!emailRegex == v) {
-            setError(correo, 'El correo no es válido');
-            return false;
-        }
-        clearError(correo);                        // si todo va bien, limpia errores
-        return true;
-    }
-
-    // -----------------------------
-    // Validación de la contraseña
-    // -----------------------------
-    function validateClave() {
-        const v = clave.value;                     // obtiene valor tal cual
-        if (!v) {                                  // si está vacío
-            setError(clave, 'Este campo es obligatorio');
-            return false;
-        }
-        if (v.length < 8) {                        // si tiene menos de 8 caracteres
-            setError(clave, 'La contraseña debe tener al menos 8 caracteres');
-            return false;
-        }
-        clearError(clave);                         // si pasa la validación
-        return true;
-    }
-
-    // -----------------------------
-    // Eventos de validación en tiempo real
-    // -----------------------------
-    correo.addEventListener('input', validateCorreo); // al escribir
-    correo.addEventListener('blur', validateCorreo);  // al perder foco
-    clave.addEventListener('input', validateClave);
-    clave.addEventListener('blur', validateClave);
-
-    // -----------------------------
-    // Toggle mostrar/ocultar contraseña
-    // -----------------------------
+    // Función para mostrar/ocultar contraseña
     document.querySelector('.toggle-pass').addEventListener('click', () => {
-        const isPass = clave.getAttribute('type') === 'password'; // ¿es tipo password?
-        clave.setAttribute('type', isPass ? 'text' : 'password'); // alterna a text/password
+        const isPass = claveInput.getAttribute('type') === 'password';
+        claveInput.setAttribute('type', isPass ? 'text' : 'password');
     });
 
-    // -----------------------------
+    // Función para mostrar errores de login
+    function showLoginError(message) {
+        errorMessage.textContent = message;
+        errorMessage.hidden = false;
+        // Opcional: limpiar los campos y enfocar el correo
+        correoInput.value = '';
+        claveInput.value = '';
+        correoInput.focus();
+    }
+    
     // Evento al enviar el formulario
-    // -----------------------------
     form.addEventListener('submit', (e) => {
-        e.preventDefault();                        // evita envío clásico del form
-        const ok = [validateCorreo(), validateClave()].every(Boolean); // valida ambos campos
-        if (!ok) {                                 // si hay errores
-            const first = form.querySelector('.invalid .input'); // busca primer input inválido
-            first?.focus({ preventScroll: false });   // le da foco
-            first?.scrollIntoView({ behavior: 'smooth', block: 'center' }); // lo lleva a la vista
-            return;                                  // detiene la ejecución
+        e.preventDefault();
+        
+        // Ocultar mensaje de error anterior
+        errorMessage.hidden = true;
+
+        const correo = correoInput.value.trim();
+        const clave = claveInput.value;
+        
+        // Validar campos vacíos (aunque el HTML 'required' ya ayuda)
+        if (!correo || !clave) {
+            showLoginError("Por favor, ingrese su correo y contraseña.");
+            return;
         }
 
-        // Si es válido, se hace la acción "simulada"
-        // Aquí normalmente harías un fetch() al backend para validar usuario/contraseña
-        window.location.href = '/vistas/estadisticas/Dashboard.html'; // redirige al dashboard
+        const usuarios = loadUsersForLogin();
+        
+        // Buscar el usuario por correo y validar la contraseña
+        const user = usuarios.find(u => 
+            u.correo.toLowerCase() === correo.toLowerCase() && 
+            u.password === clave // En un entorno real se usaría hashing (bcrypt)
+        );
+
+        if (user) {
+            if (user.inactivo) {
+                showLoginError("Tu cuenta ha sido inactivada. Contacta al administrador.");
+            } else {
+                // 🚀 LOGIN EXITOSO: Simulación de inicio de sesión
+                console.log("Inicio de sesión exitoso:", user.nombreUsuario);
+                
+                // Redirigir al dashboard
+                // Asegúrate que la ruta sea correcta según tu estructura de carpetas
+                window.location.href = '/vistas/estadisticas/Dashboard.html'; 
+            }
+        } else {
+            showLoginError("Credenciales inválidas. Verifica tu correo y contraseña.");
+        }
     });
 });

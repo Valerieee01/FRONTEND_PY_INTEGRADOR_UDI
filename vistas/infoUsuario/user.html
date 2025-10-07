@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Configuración de Sistema | Inventario Forestal</title>
+
+    <!-- Carga de Tailwind CSS (para utilidades) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+   <script>
+        // Configuración de Tailwind para usar la fuente Inter y colores personalizados
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Ubuntu', 'Cantarell', 'Noto Sans', 'Helvetica', 'Arial'],
+                    },
+                    colors: {
+                        'brand': '#2e7d32',
+                        'bg': '#eaf6ea',
+                        'ink': '#1f2a1f',
+                        'danger': '#c0392b',
+                    }
+                }
+            }
+        }
+    </script>
+    
+
+    <link rel="stylesheet" href="/vistas/infoUsuario/user.css">
+        <!-- Phosphor Icons para iconos modernos -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body>
+    <div class="app">
+         <!-- Barra superior con el título de la aplicación -->
+        <header class="topbar">Inventario Forestal Nacional</header>
+
+        <aside class="sidebar">
+            <nav class="nav" aria-label="Menú">
+                <a href="/vistas/estadisticas/Dashboard.html" ><i class="ph ph-house-simple"></i> Inicio</a>
+                <a href="/vistas/arboles/FormArboles.html"><i class="ph ph-tree"></i> Árboles</a>
+                <a href="/vistas/usuarios/users.html"><i class="ph ph-users-three"></i> Usuarios</a>
+                <a href="/vistas/infoUsuario/user.html" ><i class="ph ph-gear"></i> Configuración</a>
+            </nav>
+            <button id="logout-btn" class="logout-btn" style="margin-top: 30px; text-align: left;">
+        <i class="ph ph-sign-out"></i> Cerrar Sesión
+    </button>
+        </aside>
+
+
+
+        <div class="container">
+
+            <!-- MENSAJE DE ESTADO -->
+            <div id="status-message" class="hidden p-3 mb-4 rounded-lg text-sm font-medium border max-w-lg mx-auto"
+                role="alert"></div>
+
+            <!-- VISTA DE CONFIGURACIÓN (Activa por defecto) -->
+            <div id="configuration-view">
+                <h1>Configuración del Sistema</h1>
+
+                <section class="form-card" id="active-user-card" aria-labelledby="active-user-title">
+                    <h2 id="active-user-title">Perfil del Usuario Activo</h2>
+                    <p class="text-gray-600 mb-4">Esta es la información simulada del usuario logueado en el sistema.
+                    </p>
+                    <div id="active-user-details" class="modal-body">
+                        <p class="text-red-500">Cargando datos del perfil...</p>
+                        <!-- Detalles del usuario activo inyectados aquí por JS -->
+                    </div>
+                </section>
+
+                <section class="form-card">
+                    <h2>Configuraciones Generales</h2>
+                    <p class="text-gray-600">Opciones de preferencia y sistema.</p>
+                    <div class="mt-4 flex flex-col gap-3">
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox"
+                                class="h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
+                            <span class="text-gray-700">Habilitar notificaciones por correo</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" checked
+                                class="h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
+                            <span class="text-gray-700">Confirmar acciones críticas antes de ejecutar</span>
+                        </label>
+                    </div>
+                </section>
+            </div>
+
+            <!-- El contenedor de Gestión de Usuarios se ha removido -->
+
+            <!-- MODALES (Se mantienen por si se necesitan utilidades de confirmación/alerta) -->
+            <!-- MODAL DE CONFIRMACIÓN CUSTOM (Reemplaza a window.confirm) -->
+            <div id="confirm-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" hidden>
+                <div class="modal-content" style="max-width: 400px;">
+                    <h3 id="confirm-title" style="color: var(--danger);">Confirmación</h3>
+                    <p id="confirm-message" class="text-sm text-gray-700 mt-2 mb-4"></p>
+                    <div class="flex justify-end gap-3">
+                        <button id="confirm-cancel" class="btn-secondary">Cancelar</button>
+                        <button id="confirm-ok" class="btn-primary"
+                            style="background-color: var(--danger);">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/vistas/infoUsuario/user.js"></script>
+</body>
+
+</html>

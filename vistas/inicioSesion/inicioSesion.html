@@ -1,83 +1,59 @@
-<!doctype html> <!-- Declaración del tipo de documento HTML5 -->
-<html lang="es"> <!-- Documento en español -->
+<!doctype html>
+<html lang="es">
 <head>
-  <meta charset="utf-8" /> <!-- Codificación de caracteres (UTF-8) -->
-  <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Ajuste responsivo para móviles -->
-  <title>Inventario Forestal Nacional — Inicio de sesión</title> <!-- Título de la pestaña -->
-  <link rel="stylesheet" href="estilosSesion.css"> <!-- Hoja de estilos externa para el login -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inventario Forestal Nacional — Inicio de sesión</title>
+    <link rel="stylesheet" href="estilosSesion.css"> 
 </head>
 <body>
-  <!-- Contenedor principal centrado en pantalla -->
-  <main class="page">
-    
-    <!-- Tarjeta que contiene el login -->
-    <section class="card" role="dialog" aria-labelledby="titulo">
-      
-      <!-- Encabezado con logo e identificadores -->
-      <header class="header">
-        <!-- Logo institucional -->
-        <div class="logo" aria-hidden="true">
-          <img class="logo-img" src="/vistas/img/ideam-logo.jpg" alt="">
-        </div>
-        <!-- Texto: título y subtítulo -->
-        <div>
-          <h1 class="title" id="titulo">Inventario Forestal Nacional</h1>
-          <p class="subtitle">Aplicativo • Inicio de sesión</p>
-        </div>
-      </header>
+    <main class="page">
+        <section class="card" role="dialog" aria-labelledby="titulo">
+            <header class="header">
+                <div class="logo" aria-hidden="true">
+                    <img class="logo-img" src="/vistas/img/ideam-logo.jpg" alt="">
+                </div>
+                <div>
+                    <h1 class="title" id="titulo">Inventario Forestal Nacional</h1>
+                    <p class="subtitle">Aplicativo • Inicio de sesión</p>
+                </div>
+            </header>
 
-      <!-- Formulario de login -->
-      <form id="form-login" autocomplete="on" novalidate>
-        
-        <!-- Campo de correo -->
-        <div class="field">
-          <label for="correo">Correo</label>
-          <input id="correo" name="email" type="text" class="input" 
-                 placeholder="usuario@ejemplo.com" 
-                 aria-describedby="correo-hint" aria-invalid="false" />
-          <!-- Texto de ayuda o error dinámico -->
-          <small id="correo-hint" class="hint" role="alert"></small>
-        </div>
+            <form id="form-login" autocomplete="on" novalidate>
+                <div class="field">
+                    <label for="correo">Correo Electrónico</label>
+                    <input id="correo" name="email" type="email" class="input" 
+                           placeholder="usuario@ejemplo.com" required aria-describedby="correo-hint" />
+                    <small id="correo-hint" class="hint" role="alert"></small>
+                </div>
 
-        <!-- Campo de contraseña con botón de mostrar/ocultar -->
-        <div class="field">
-          <label for="clave">Contraseña</label>
-          <div class="password-wrap">
-            <input id="clave" name="password" type="password" class="input" 
-                   placeholder="••••••••" 
-                   aria-describedby="clave-hint" aria-invalid="false" />
-            <!-- Botón con icono de ojo para alternar visibilidad -->
-            <button type="button" class="toggle-pass" aria-label="Mostrar/ocultar contraseña">👁️</button>
-          </div>
-          <!-- Texto de ayuda o error dinámico -->
-          <small id="clave-hint" class="hint" role="alert"></small>
-        </div>
+                <div class="field">
+                    <label for="clave">Contraseña</label>
+                    <div class="password-wrap">
+                        <input id="clave" name="password" type="password" class="input" 
+                               placeholder="••••••••" required aria-describedby="clave-hint" />
+                        <button type="button" class="toggle-pass" aria-label="Mostrar/ocultar contraseña">👁️</button>
+                    </div>
+                    <small id="clave-hint" class="hint" role="alert"></small>
+                </div>
 
-        <!-- Fila con checkbox "Recordarme" y enlace de recuperación -->
-        <div class="row">
-          <label class="checkbox">
-            <input type="checkbox" id="remember" name="remember" />
-            Recordarme
-          </label>
-          <a href="#" target="_self" rel="nofollow">¿Olvidaste tu contraseña?</a>
-        </div>
+                <div class="row">
+                    <label class="checkbox">
+                        <input type="checkbox" id="remember" name="remember" />
+                        Recordarme
+                    </label>
+                    <a href="#" target="_self" rel="nofollow">¿Olvidaste tu contraseña?</a>
+                </div>
 
-        <!-- Botón principal para enviar el formulario -->
-        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                
+                <div id="login-error-message" class="text-sm text-center font-medium text-red-600 mt-2" hidden></div>
+            </form>
 
-        <!-- Separador visual con texto "o" -->
-        <div class="divider">o</div>
+            <p class="footer">© 2025 Inventario Forestal Nacional</p>
+        </section>
+    </main>
 
-        <!-- Botón alternativo para login con cuenta institucional -->
-        <button type="button" class="btn btn-ghost">Ingresar con cuenta institucional</button>
-      </form>
-
-      <!-- Pie de la tarjeta con derechos de autor -->
-      <p class="footer">© 2025 Inventario Forestal Nacional</p>
-    </section>
-  </main>
-
-  <!-- Archivo JS externo con validaciones personalizadas -->
-  <script src="validaciones.js"></script>
+    <script src="/vistas/inicioSesion/validaciones.js"></script>
 </body>
 </html>

@@ -1,392 +1,439 @@
+/* Variables CSS */
 :root {
-  /* Ámbito raíz para variables CSS (custom properties) */
   --bg: #eaf6ea;
-  /* Color de fondo base de la app */
   --ink: #1f2a1f;
-  /* Color principal del texto */
   --muted: #546154;
-  /* Color de texto secundario/muted */
   --panel: #ffffff;
-  /* Color de paneles/tarjetas internas */
-  --ring: #dfe7df;
-  /* Color de bordes/separadores claros */
   --brand: #2e7d32;
-  /* Color de marca (verde principal) */
-  --brand-ink: #ffffff;
-  /* Texto sobre el color de marca */
-  --topbar: #56a05a;
-  /* Color de la barra superior */
-  --sidebar: #2f7a35;
-  /* Color del sidebar */
-  --sidebar-ink: #eef7ee;
-  /* Texto/íconos sobre el sidebar */
-  --shadow: 0 8px 24px rgba(0, 0, 0, .06), 0 2px 6px rgba(0, 0, 0, .05);
-  /* Sombra suave para tarjetas */
-  --r: 14px;
-  /* Radio base para bordes redondeados */
   --danger: #c0392b;
-  /* Color para estados de error/alerta */
+  --gap: 16px;
+  --radius: 12px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, .06), 0 2px 6px rgba(0, 0, 0, .05);
+  --topbar: #56a05a;
+  --sidebar: #2f7a35;
+  --sidebar-ink: #eef7ee;
+  --accent: #0284c7;
+  /* Azul para editar */
 }
 
+/* Estilos globales */
 html,
 body {
   height: 100%
 }
 
-/* Hace que html y body ocupen toda la altura de la ventana */
+
 body {
   margin: 0;
-  /* Elimina margen por defecto del body */
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial;
-  /* Pila tipográfica moderna */
+  font-family: var(--font-sans, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial);
   color: var(--ink);
-  /* Color de texto por defecto */
   background: var(--bg);
-  /* Color de fondo general */
   line-height: 1.45;
-  /* Altura de línea cómoda para lectura */
 }
 
-/* Layout */
+/* Layout principal de la aplicación */
 .app {
   min-height: 100%;
-  /* Asegura que el contenedor ocupe al menos el alto de la ventana */
   display: grid;
-  /* Usa CSS Grid para el layout */
   grid-template-columns: 240px 1fr;
-  /* Columna fija para sidebar y flexible para contenido */
   grid-template-rows: 56px auto;
-  /* Fila para topbar y otra para el resto */
   grid-template-areas:
-    /* Define las áreas con nombre para facilitar el posicionamiento */
     "sidebar topbar"
     "sidebar main";
 }
 
 .sidebar {
   grid-area: sidebar;
-  /* Asigna este bloque al área 'sidebar' */
   background: var(--sidebar);
-  /* Fondo del sidebar */
   color: var(--sidebar-ink);
-  /* Color de texto en sidebar */
   padding: 22px 18px;
-  /* Espaciado interno */
 }
 
+.topbar {
+  grid-area: topbar;
+  background: var(--topbar);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 10px 24px;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.container {
+  grid-area: main;
+  padding: 18px 20px 24px;
+  width: min(1200px, 100%);
+  margin-inline: auto;
+}
+
+.container h1 {
+  color: var(--brand);
+  margin: 0 0 18px 0;
+  font-weight: 800;
+  font-size: 2rem;
+}
+
+/* Navegación lateral */
 .nav {
   display: flex;
   flex-direction: column;
   gap: 12px
 }
 
-/* Navegación vertical con separación entre enlaces */
 .nav a {
   color: var(--sidebar-ink);
   text-decoration: none;
-  /* Color de los enlaces y sin subrayado */
   padding: 10px 12px;
   border-radius: 10px;
   font-weight: 600;
-  /* Click area amplia, bordes redondos y texto seminegrita */
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .nav a:hover {
   background: rgba(255, 255, 255, .10);
 }
 
-/* Resalta el enlace al pasar el mouse con un fondo tenue */
-
-.topbar {
-  grid-area: topbar;
-  /* Asigna al área 'topbar' */
-  background: var(--topbar);
-  /* Color de fondo de la barra superior */
-  color: #fff;
-  /* Texto blanco en la topbar */
-  display: flex;
-  align-items: center;
-  padding: 10px 24px;
-  /* Centrado vertical y espaciado interno */
-  font-weight: 800;
-  letter-spacing: .2px;
-  /* Título/branding más marcado */
+/* Estilos adicionales para el botón de Cerrar Sesión */
+.logout-btn {
+    /* Reiniciar estilos de botón */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    border: none;
+    background: none;
+    cursor: pointer;
+    
+    /* Estilos de texto y color */
+    color: var(--sidebar-ink);
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: inherit; /* Heredar el tamaño de fuente */
+    
+    transition: background-color 0.15s ease;
 }
 
-.main {
-  grid-area: main;
-  padding: 18px 20px 24px;
+.logout-btn:hover {
+    background: rgba(255, 255, 255, .15); /* Ligeramente más oscuro en hover */
 }
 
-/* Área principal con padding */
-.container {
-  width: min(1120px, 100%);
-  margin-inline: auto;
-}
-
-/* centrado */
-/* Contenedor centrado con ancho máximo */
-
-/* Tarjeta */
-.card {
-  background: #f2faf2;
-  /* Fondo muy claro (verde pálido) para diferenciar del fondo de la página */
-  border: 1px solid var(--ring);
-  /* Borde sutil alrededor */
-  border-radius: 12px;
-  /* Bordes redondeados */
-  box-shadow: var(--shadow);
-  /* Sombras suaves para elevar la tarjeta */
-  padding: 18px;
-  /* Espaciado interno */
-}
-
-.inner {
+/* Estilos de tarjetas (Formulario y Tabla) */
+.form-card,
+.table-card {
   background: var(--panel);
-  /* Fondo blanco para el contenido interno */
-  border: 1px solid var(--ring);
-  /* Borde interno sutil */
-  border-radius: 12px;
-  /* Bordes redondeados consistentes */
-  padding: 22px clamp(16px, 3.5vw, 34px);
-  /* Padding con lado horizontal fluido (responsive) */
+  padding: 18px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 10px auto 22px auto;
+  max-width: 980px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
-.title {
-  margin: 0 0 14px;
-  /* Sin margen arriba, 14px abajo */
-  font-weight: 900;
+.table-card {
+  max-width: 1200px;
+}
+
+.form-card h2,
+.table-card h2 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
   color: var(--brand);
-  /* Título en negrita fuerte y color de marca */
-  font-size: clamp(22px, 3.2vw, 34px);
-  /* Tamaño fluido: mínimo 22px, máximo 34px */
-  letter-spacing: .2px;
-  /* Ligerísimo espaciado entre letras */
 }
 
-/* Secciones */
-.section {
-  margin: 16px 0;
-}
-
-/* Separación vertical entre secciones */
-.section h2 {
-  margin: 0 0 10px;
-  /* Sin margen arriba, 10px abajo */
-  font-size: 22px;
-  color: #2f692f;
-  font-weight: 900;
-  /* Subtítulos destacados en verde oscuro */
-}
-
-/* Grid de campos usando <dl> */
-dl {
-  margin: 0;
-}
-
-/* Quita margen por defecto del <dl> */
-.grid-2 {
+/* Layout del formulario */
+.form-grid {
   display: grid;
-  /* Grid para etiquetas/inputs en 2 columnas */
-  grid-template-columns: 260px 1fr;
-  /* Columna izquierda fija (labels) y derecha flexible (inputs) */
-  gap: 10px 18px;
-  /* Espaciado entre filas y columnas */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap);
 }
 
-dt {
-  font-weight: 700;
-  color: #2d3a2d;
-  align-self: center;
+.form-grid .full {
+  grid-column: 1 / -1;
 }
 
-/* Etiquetas con peso y color, centradas verticalmente */
-dd {
-  margin: 0;
-}
-
-/* Quita margen por defecto del <dd> */
-
-/* Inputs bonitos */
-input,
-select,
-textarea {
-  width: 100%;
-  /* Los campos ocupan todo el ancho disponible */
-  box-sizing: border-box;
-  /* Incluye borde y padding en el cálculo del ancho */
-  font: inherit;
-  color: inherit;
-  /* Heredan tipografía y color del contenedor */
-  background: #fff;
-  /* Fondo blanco para los inputs */
-  border: 1.5px solid #d9e5d9;
-  /* Borde suave verdoso */
-  border-radius: 12px;
-  /* Bordes redondeados acordes al resto del diseño */
-  padding: 12px 14px;
-  /* Espaciado interno cómodo */
-  outline: none;
-  /* Quita el outline por defecto (lo reemplazamos con box-shadow) */
-  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
-  /* Transiciones suaves en foco */
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: #8da18d;
-}
-
-/* Color del placeholder tenue */
-input:focus,
-select:focus,
-textarea:focus {
-  border-color: var(--brand);
-  /* Borde en color de marca al enfocar */
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand) 20%, transparent);
-  /* Anillo de foco accesible (soporta color-mix) */
-  background: #fbfffb;
-  /* Fondo ligeramente más claro al foco */
-}
-
-/* Hints y errores */
-.req {
-  color: var(--brand);
-  margin-left: 4px;
-}
-
-/* Asterisco o marca para campos requeridos */
-.hint {
+.field label {
   display: block;
-  /* Ocupa línea completa bajo el input */
-  margin-top: 6px;
-  /* Separación del input */
-  font-size: .9rem;
-  /* Tamaño un poco menor que el cuerpo */
-  color: #5c6b5c;
-  /* Color de ayuda neutro */
+  font-weight: 600;
+  font-size: 13px;
+  color: #314432;
+  margin-bottom: 6px;
 }
 
-.invalid .hint {
-  color: var(--danger);
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #d8e6d8;
+  border-radius: 8px;
+  background: #fbfffb;
+  font-size: 14px;
+  color: var(--ink);
+  box-sizing: border-box;
 }
 
-/* Mensaje de ayuda en rojo cuando hay error */
-.invalid input,
-.invalid select,
-.invalid textarea {
-  border-color: var(--danger);
-  /* Borde rojo para campos inválidos */
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--danger) 20%, transparent);
-  /* Anillo de error */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 14px;
 }
 
 /* Botones */
-.actions {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-top: 18px;
-}
-
-/* Contenedor de botones, con separación y wrap en móviles */
-.btn {
-  appearance: none;
+.btn-primary,
+.btn-secondary,
+.action-btn.delete-btn {
+  padding: 10px 16px;
+  border-radius: 8px;
   border: 0;
   cursor: pointer;
-  /* Resetea estilo nativo y muestra cursor de botón */
-  padding: 12px 22px;
-  border-radius: 12px;
-  /* Tamaño cómodo y bordes redondeados */
-  font-weight: 800;
-  font: inherit;
-  /* Texto en negrita y tipografía heredada */
-  transition: .15s ease filter, .02s transform, box-shadow .15s ease;
-  /* Transiciones sutiles al interactuar */
+  font-weight: 700;
+  color: #fff;
+  transition: transform .12s ease, box-shadow .12s ease;
 }
 
-.btn:active {
+.btn-primary {
+  background: var(--brand);
+}
+
+.btn-secondary {
+  background: #6b776b;
+}
+
+.action-btn.delete-btn {
+  background: var(--danger);
+}
+
+.btn-primary:active,
+.btn-secondary:active,
+.action-btn.delete-btn:active {
   transform: translateY(1px);
 }
 
-/* Pequeño “hundimiento” al presionar */
-.btn-primary {
-  background: var(--brand);
-  color: var(--brand-ink);
-  /* Botón principal: verde con texto blanco */
-  box-shadow: 0 6px 18px color-mix(in oklab, var(--brand) 25%, transparent);
-  /* Sombra acorde al color de marca */
-}
 
-.btn-primary:hover {
-  filter: brightness(1.03);
-}
-
-/* Aclara un poco al pasar el mouse */
-.btn-outline {
-  background: #fbfffb;
+/* Filtros */
+.filter-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(180deg, #ffffff, #f4fff4);
+  border: 1px solid rgba(46, 125, 50, 0.14);
   color: var(--brand);
-  /* Botón contorneado: fondo claro y texto verde */
-  border: 2px solid #bcd8bc;
-  /* Borde visible en tono verde claro */
-}
-
-.btn-ghost {
-  background: #fbfffb;
-  color: #3a4a3a;
-  /* Botón “ghost”: muy ligero */
-  border: 2px solid #dfe6df;
-  /* Borde gris-verdoso suave */
-}
-
-/* Footer */
-.footer {
-  margin-top: 14px;
-  /* Separación del contenido anterior */
-  background: #e3ebe3;
-  /* Fondo gris verdoso claro */
-  border: 1px solid var(--ring);
-  /* Borde sutil */
+  padding: 9px 14px;
   border-radius: 10px;
-  /* Bordes redondeados */
-  padding: 10px 14px;
-  /* Espaciado interno */
-  color: #4e5b4e;
-  font-size: 14px;
-  text-align: center;
-  /* Texto del footer */
+  cursor: pointer;
+  font-weight: 700;
+  width: 260px;
+  box-shadow: 0 6px 18px rgba(46, 125, 50, 0.06);
+  transition: transform .12s ease;
 }
 
-/* Responsivo */
-@media (max-width: 900px) {
+.filter-toggle .chev {
+  transition: transform 0.3s ease;
+}
 
-  /* Reglas cuando el ancho de la ventana es 900px o menos */
-  .grid-2 {
+.filter-toggle[aria-expanded="true"] .chev {
+  transform: rotate(180deg);
+}
+
+.filters-panel {
+  margin-top: 6px;
+  background: var(--panel);
+  border: 1px solid #e6f1e6;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(10, 20, 10, 0.04);
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+.filters-form .filter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.filters-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* Tabla */
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 720px;
+}
+
+thead th {
+  text-align: left;
+  padding: 10px 12px;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 700;
+}
+
+tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eef3ee;
+  vertical-align: middle;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background: #fbfff7;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.action-btn {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 0;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1;
+  /* Asegura que los iconos estén centrados */
+}
+
+.action-btn i {
+  font-size: 16px;
+  display: block;
+}
+
+.edit-btn {
+  background: var(--accent);
+}
+
+.cancel-btn {
+  background: var(--danger);
+}
+
+.view-btn {
+  background: #4caf50;
+}
+
+.anulado td {
+  background: #fff0f0 !important;
+  color: #6b4b4b;
+  text-decoration: line-through;
+}
+
+.anulado .action-btn {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(10, 10, 10, 0.45);
+  z-index: 9999;
+}
+
+.modal[hidden] {
+  display: none !important;
+}
+
+.modal-content {
+  width: min(720px, 95%);
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 18px 40px rgba(10, 20, 10, 0.2);
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.modal-body {
+  margin-top: 8px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.modal-body dt {
+  font-weight: 700;
+  color: #2f552f;
+  margin-top: 12px;
+}
+
+.modal-body dd {
+  margin: 4px 0 0 0;
+  color: #243322;
+}
+
+/* Adaptación para dispositivos móviles */
+@media (max-width: 900px) {
+  .form-grid {
     grid-template-columns: 1fr;
   }
 
-  /* Pasa el formulario a 1 columna (labels arriba) */
-  dt {
-    align-self: unset;
+  .filters-form .filter-grid {
+    grid-template-columns: 1fr;
   }
 
-  /* Restablece el alineado vertical de labels */
-}
+  .filter-toggle {
+    width: 100%;
+  }
 
-@media (max-width:760px) {
-
-  /* Reglas para móviles/anchos muy pequeños */
   .app {
     grid-template-columns: 1fr;
-    /* Quita la columna fija del sidebar; todo en una columna */
-    grid-template-rows: 56px auto auto;
-    /* Fila para topbar y luego sidebar y main */
-    grid-template-areas:
-      "topbar"
-      /* Muestra topbar primero */
-      "sidebar"
-      /* Sidebar ahora debajo del topbar */
-      "main";
-    /* Contenido principal al final */
+    grid-template-rows: 56px auto;
+    grid-template-areas: "topbar" "main";
   }
+
+  .sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .filters-actions {
+    justify-content: space-between;
+  }
+
+  .filter-toggle {
+    font-size: 0.9rem;
+  }
+}
+
+/* Modificado para que aplique a <a> y al nuevo <span> (nav-item) */
+.nav a.active-nav, .nav .nav-item.active-nav {
+    background: rgba(255, 255, 255, .20); /* Fondo ligeramente más claro */
+    /* Puedes añadir más estilos, como un color diferente o una sombra */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
 }
