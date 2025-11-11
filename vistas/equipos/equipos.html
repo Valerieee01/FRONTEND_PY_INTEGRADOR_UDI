@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Formulario de Registro de Árbol</title>
+    <!-- Hoja de estilos externa que contiene los estilos del layout y del formulario -->
+    <link rel="stylesheet" href="estilosEquipos.css">
+</head>
+
+<body>
+    <div class="app">
+        <!-- Sidebar de navegación lateral -->
+        <aside class="sidebar">
+            <nav class="nav" aria-label="Menú">
+                <!-- Enlaces de navegación principales -->
+                <a href="/vistas/estadisticas/Dashboard.html">Inicio</a>
+                <a href="/vistas/conglomerado/conglomerado.html">Conglomerados</a>
+                <a href="/vistas/subparcelas/subparcela.html">Subparcelas</a>
+                <a href="/vistas/arboles/FormArboles.html">Árboles</a>
+                <a href="/vistas/empleados/empleados.html">Empleados</a>
+                <a href="/vistas/equipos/equipos.html">Equipos</a>
+                <a href="#">Usuarios</a>
+            </nav>
+        </aside>
+
+        <!-- Barra superior con el título de la aplicación -->
+        <header class="topbar">Inventario Forestal Nacional</header>
+
+        <div class="container">
+
+            <!-- Main -->
+            <div class="main">
+                <header>
+                    <h1>Gestión y Asignación de Equipos</h1>
+                </header>
+
+                <!-- ======== SECCIÓN ASIGNACIÓN DE EQUIPOS ======== -->
+                <section class="card">
+                    <h2>Asignación de Equipos</h2>
+                    <form id="assignForm" class="form">
+                        <div class="field">
+                            <label>ID de equipo</label>
+                            <input type="text" id="eqId" readonly>
+                        </div>
+
+                        <div class="field">
+                            <label>Jefe de brigada</label>
+                            <select id="jefeSelect" required></select>
+                        </div>
+
+                        <div class="field">
+                            <label>Técnico auxiliar</label>
+                            <select id="tecnicoSelect" required></select>
+                        </div>
+
+                        <div class="field">
+                            <label>Botánico</label>
+                            <select id="botanicoSelect" required></select>
+                        </div>
+
+                        <div class="field">
+                            <label>Coinvestigador</label>
+                            <select id="coinvestSelect" required></select>
+                        </div>
+
+                        <div class="field">
+                            <label>Conglomerado</label>
+                            <input type="text" id="conglomerado" placeholder="Ej. C-01" required>
+                        </div>
+
+                        <div class="field">
+                            <label>Subparcela</label>
+                            <input type="text" id="subparcela" placeholder="Ej. SP-01" required>
+                        </div>
+
+                        <div class="field">
+                            <label>Fecha inicio</label>
+                            <input type="date" id="fechaInicio" required>
+                        </div>
+
+                        <div class="field">
+                            <label>Fecha fin</label>
+                            <input type="date" id="fechaFin" required>
+                        </div>
+
+                        <div class="actions">
+                            <button type="submit" class="btn">Guardar equipo</button>
+                            <button type="button" id="clearAssign" class="btn secondary">Limpiar</button>
+                        </div>
+                    </form>
+
+                    <h3>Equipos registrados</h3>
+                    <table id="equiposTable">
+                        <thead>
+                            <tr>
+                                <th>ID Equipo</th>
+                                <th>Jefe</th>
+                                <th>Técnico</th>
+                                <th>Botánico</th>
+                                <th>Coinvestigador</th>
+                                <th>Conglomerado</th>
+                                <th>Subparcela</th>
+                                <th>Inicio</th>
+                                <th>Fin</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </section>
+            </div>
+
+            <div class="footer">
+                © 2025 - Dashboard Conglomerados IFN Colombia | Todos los derechos reservados
+            </div>
+        </div>
+        <script src="/vistas/empleados/main.js"></script>
+
+</body>
+
+</html>

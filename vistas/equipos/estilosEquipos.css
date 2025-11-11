@@ -1,0 +1,145 @@
+@import url("/vistas/arboles/estiloArboles.css");
+
+:root {
+  --bg: #eaf6ea;
+  --card-bg: #ffffff;
+  --ink: #1f2a1f;
+  --muted: #6b776b;
+  --primary: #2e7d32;
+  --primary-ink: #ffffff;
+  --input-bg: #ffffff;
+  --input-bd: #d9e1d9;
+  --input-bd-focus: #2e7d32;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.05);
+  --radius: 16px;
+  font-family: "Inter", sans-serif;
+}
+.main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+  }
+
+  /* ------------------ Footer ------------------ */
+.footer {
+  margin-top: 14px;
+  /* Separación respecto al contenido */
+  background: #e3ebe3;
+  /* Fondo gris verdoso claro */
+  border: 1px solid var(--ring);
+  /* Borde */
+  border-radius: 10px;
+  /* Bordes redondeados */
+  padding: 10px 14px;
+  /* Espaciado interno */
+  color: #4e5b4e;
+  /* Color de texto */
+  text-align: center;
+  /* Centrado */
+  font-size: 14px
+    /* Tamaño pequeño */
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+header h1 {
+  font-size: 22px;
+  color: var(--ink);
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+h2, h3 {
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+label {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+input, select {
+  padding: 10px;
+  border: 1px solid var(--input-bd);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--input-bg);
+}
+
+input:focus, select:focus {
+  border-color: var(--input-bd-focus);
+  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.15);
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.btn {
+  background: var(--primary);
+  color: var(--primary-ink);
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn.secondary {
+  background: #fff;
+  color: var(--primary);
+  border: 1px solid var(--input-bd);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+.aviso {
+  font-size: 13px;
+  color: #b33a3a;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+th, td {
+  border-bottom: 1px solid #e0e6e0;
+  padding: 8px;
+  font-size: 13px;
+}
+
+th {
+  background: #f2f9f2;
+  color: var(--muted);
+  font-weight: 600;
+}
