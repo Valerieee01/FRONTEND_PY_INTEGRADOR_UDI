@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Gestión de Usuarios | Inventario Forestal</title>
-    
+
     <!-- Carga de Tailwind CSS (para utilidades) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -26,36 +27,40 @@
             }
         }
     </script>
-    
+
     <!-- Enlace a la hoja de estilos personalizada -->
     <link rel="stylesheet" href="/vistas/usuarios/users.css">
-    
+
     <!-- Phosphor Icons para iconos modernos -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
 <body>
     <div class="app">
-       <!-- Barra superior con el título de la aplicación -->
+        <!-- Barra superior con el título de la aplicación -->
         <header class="topbar">Inventario Forestal Nacional</header>
 
         <aside class="sidebar">
             <nav class="nav" aria-label="Menú">
-                <a href="/vistas/estadisticas/Dashboard.html" ><i class="ph ph-house-simple"></i> Inicio</a>
+                <a href="/vistas/estadisticas/Dashboard.html"><i class="ph ph-house-simple"></i> Inicio</a>
                 <a href="/vistas/arboles/FormArboles.html"><i class="ph ph-tree"></i> Árboles</a>
+                <a href="/vistas/conglomerado/conglomerado.html">Conglomerados</a>
+                <a href="/vistas/subparcelas/subparcela.html">Subparcelas</a>
                 <a href="/vistas/usuarios/users.html"><i class="ph ph-users-three"></i> Usuarios</a>
-                <a href="/vistas/infoUsuario/user.html" ><i class="ph ph-gear"></i> Configuración</a>
+                <a href="/vistas/infoUsuario/user.html"><i class="ph ph-gear"></i> Configuración</a>
+                <a href="/vistas/empleados/empleados.html">Empleados</a>
+                <a href="/vistas/equipos/equipos.html">Equipos</a>
             </nav>
             <button id="logout-btn" class="logout-btn" style="margin-top: 30px; text-align: left;">
-        <i class="ph ph-sign-out"></i> Cerrar Sesión
-    </button>
+                <i class="ph ph-sign-out"></i> Cerrar Sesión
+            </button>
         </aside>
-
         <div class="container">
             <h1>Gestión de Usuarios</h1>
 
             <!-- MENSAJE DE ESTADO -->
-            <div id="status-message" class="hidden p-3 mb-4 rounded-lg text-sm font-medium border max-w-lg mx-auto" role="alert"></div>
+            <div id="status-message" class="hidden p-3 mb-4 rounded-lg text-sm font-medium border max-w-lg mx-auto"
+                role="alert"></div>
 
             <!-- FORMULARIO DE USUARIOS -->
             <section class="form-card" aria-labelledby="user-form-title">
@@ -120,7 +125,7 @@
                     </table>
                 </div>
             </section>
-            
+
             <!-- MODAL (ver detalle) -->
             <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" hidden>
                 <div class="modal-content" role="document">
@@ -139,7 +144,8 @@
                     <p id="confirm-message" class="text-sm text-gray-700 mt-2 mb-4"></p>
                     <div class="flex justify-end gap-3">
                         <button id="confirm-cancel" class="btn-secondary">Cancelar</button>
-                        <button id="confirm-ok" class="btn-primary" style="background-color: var(--danger);">Aceptar</button>
+                        <button id="confirm-ok" class="btn-primary"
+                            style="background-color: var(--danger);">Aceptar</button>
                     </div>
                 </div>
             </div>
@@ -149,4 +155,5 @@
     <!-- Enlace al archivo de JavaScript -->
     <script src="users.js"></script>
 </body>
+
 </html>

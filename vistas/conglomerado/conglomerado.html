@@ -5,7 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Conglomerados</title>
-  <link rel="stylesheet" href="estiloConglomerado.css">
+  <link rel="stylesheet" href="estilosConglomerado.css">
+  
+  <!-- Phosphor Icons para iconos modernos -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
 <body>
@@ -13,15 +16,19 @@
 
     <aside class="sidebar">
       <nav class="nav" aria-label="Menú">
-        <!-- Enlaces de navegación principales -->
-        <a href="/vistas/estadisticas/Dashboard.html">Inicio</a>
+          <nav class="nav" aria-label="Menú">
+        <a href="/vistas/estadisticas/Dashboard.html"><i class="ph ph-house-simple"></i> Inicio</a>
+        <a href="/vistas/arboles/FormArboles.html"><i class="ph ph-tree"></i> Árboles</a>
         <a href="/vistas/conglomerado/conglomerado.html">Conglomerados</a>
         <a href="/vistas/subparcelas/subparcela.html">Subparcelas</a>
-        <a href="/vistas/arboles/FormArboles.html">Árboles</a>
+        <a href="/vistas/usuarios/users.html"><i class="ph ph-users-three"></i> Usuarios</a>
+        <a href="/vistas/infoUsuario/user.html"><i class="ph ph-gear"></i> Configuración</a>
         <a href="/vistas/empleados/empleados.html">Empleados</a>
         <a href="/vistas/equipos/equipos.html">Equipos</a>
-        <a href="#">Usuarios</a>
       </nav>
+      <button id="logout-btn" class="logout-btn" style="margin-top: 30px; text-align: left;">
+        <i class="ph ph-sign-out"></i> Cerrar Sesión
+      </button>
     </aside>
 
     <!-- Barra superior con el título de la aplicación -->
