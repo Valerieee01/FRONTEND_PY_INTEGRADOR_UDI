@@ -1,63 +1,53 @@
-   <!-- Main -->
-      <div class="main">
-        <!-- Tabla -->
-        <div class="table-container">
-          <h2>Registro de Conglomerados</h2>
+<div class="table-container">
+  <div class="filters">
+    <input type="text" [(ngModel)]="filtroPalabra" placeholder="Buscar por palabra clave...">
+    <input type="text" [(ngModel)]="filtroCodigo" placeholder="Buscar por código...">
+    <input type="text" [(ngModel)]="filtroID" placeholder="Buscar por ID...">
+  </div>
 
-          <!-- Filtros -->
-          <div class="filters">
-            <input type="text" id="filterPalabra" placeholder="Buscar por palabra clave...">
-            <input type="text" id="filterCodigo" placeholder="Buscar por código...">
-            <input type="text" id="filterID" placeholder="Buscar por ID...">
-          </div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Código</th>
+        <th>Latitud</th>
+        <th>Longitud</th>
+        <th>Altitud</th>
+        <th>Fecha</th>
+        <th>Observaciones</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of conglomeradosFiltrados">
+        <td>{{c.id_conglomerado}}</td>
+        <td>{{c.codigo}}</td>
+        <td>{{c.latitud}}</td>
+        <td>{{c.longitud}}</td>
+        <td>{{c.altitud}}</td>
+        <td>{{c.fecha}}</td>
+        <td>{{c.observaciones}}</td>
+        <td>
+          <button class="btn-view" (click)="verConglomerado(c)">Ver</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-          <table id="conglomeradosTable">
-            <thead>
-              <tr>
-                <th><input type="checkbox" id="selectAll"></th>
-                <th>ID</th>
-                <th>Código</th>
-                <th>Nombre del Conglomerado</th>
-                <th>Ubicación</th>
-                <th>Fecha de Registro</th>
-                <th>Observaciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><input type="checkbox" class="row-select"></td>
-                <td>1</td>
-                <td>CG-2001</td>
-                <td>Conglomerado Experimental Los Andes</td>
-                <td>Cundinamarca</td>
-                <td>2025-09-02</td>
-                <td>Conglomerado en buen estado</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="row-select"></td>
-                <td>2</td>
-                <td>CG-2002</td>
-                <td>Reserva Natural El Cedral</td>
-                <td>Meta</td>
-                <td>2025-08-28</td>
-                <td>Incluye nuevas parcelas</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="row-select"></td>
-                <td>3</td>
-                <td>CG-2010</td>
-                <td>Conglomerado Bosque Seco Tropical</td>
-                <td>Huila</td>
-                <td>2025-08-20</td>
-                <td>Requiere mantenimiento</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <!-- Botones de acción -->
-          <div class="table-actions">
-            <button class="btn-pdf" onclick="generarPDF()">Generar PDF</button>
-            <button class="btn-delete" onclick="eliminarFilas()">Eliminar</button>
-          </div>
-        </div>
-      </div>
+<!-- Modal -->
+<div class="modal-overlay" *ngIf="conglomeradoSeleccionado">
+  <div class="modal">
+    <button class="modal-close" (click)="cerrarModal()">✕</button>
+    <h3>Detalles del Conglomerado</h3>
+    <div class="modal-content">
+      <p><strong>ID:</strong> {{conglomeradoSeleccionado.id_conglomerado}}</p>
+      <p><strong>Código:</strong> {{conglomeradoSeleccionado.codigo}}</p>
+      <p><strong>Latitud:</strong> {{conglomeradoSeleccionado.latitud}}</p>
+      <p><strong>Longitud:</strong> {{conglomeradoSeleccionado.longitud}}</p>
+      <p><strong>Altitud:</strong> {{conglomeradoSeleccionado.altitud}}</p>
+      <p><strong>Fecha:</strong> {{conglomeradoSeleccionado.fecha}}</p>
+      <p><strong>Observaciones:</strong> {{conglomeradoSeleccionado.observaciones}}</p>
+    </div>
+  </div>
+</div>

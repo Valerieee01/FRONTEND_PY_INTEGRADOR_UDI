@@ -1,1 +1,131 @@
-<p>equipos works!</p>
+<div class="equipos-container">
+  
+  <header class="header">
+  <h2>📋 Gestión de Equipos de Campo</h2>
+  <button (click)="gestionarVisibilidadFormulario()" class="btn-primary">
+    {{ mostrarFormulario ? 'Ocultar Formulario' : 'Crear Nuevo Equipo' }}
+  </button>
+</header>
+  
+  <hr>
+
+  <div *ngIf="mostrarFormulario" class="form-section">
+    <div class="card-form">
+      <h3 class="form-title">
+        {{ editandoEquipoId ? '📝 Editando Equipo: ' + equipoForm.get('nombre_equipo')?.value : 'Crear Nuevo Equipo' }}
+      </h3>
+
+      <form [formGroup]="equipoForm" (ngSubmit)="gestionarEquipo()">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nombre_equipo">Nombre del Equipo *</label>
+            <input id="nombre_equipo" type="text" formControlName="nombre_equipo" required>
+          </div>
+          <div class="form-group">
+            <label for="institucion">Institución</label>
+            <input id="institucion" type="text" formControlName="institucion">
+          </div>
+          <div class="form-group">
+            <label for="estado">Estado</label>
+            <select id="estado" formControlName="estado">
+              <option value="activo">Activo</option>
+              <option value="inactivo">Inactivo</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group full-width">
+          <label for="observaciones">Observaciones</label>
+          <textarea id="observaciones" formControlName="observaciones"></textarea>
+        </div>
+
+        <div class="integrantes-section">
+          <h4>👥 Integrantes del Equipo (Mínimo 1)</h4>
+          
+          <div [formGroup]="integranteForm" class="integrante-form-grid">
+            <div class="form-group">
+              <label for="id_empleado">Empleado</label>
+              <select id="id_empleado" formControlName="id_empleado">
+                <option value="" disabled selected>Seleccione empleado</option>
+                <option *ngFor="let emp of empleados" [value]="emp.id_empleado">{{ emp.nombre_completo }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="id_cargo">Cargo</label>
+              <select id="id_cargo" formControlName="id_cargo">
+                <option value="" disabled selected>Seleccione cargo</option>
+                <option *ngFor="let cargo of cargos" [value]="cargo.id_cargo">{{ cargo.nombre_cargo }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="fecha_inicio">Fecha de Inicio</label>
+              <input id="fecha_inicio" type="date" formControlName="fecha_inicio">
+            </div>
+            <button type="button" (click)="agregarIntegranteTemporal()" [disabled]="integranteForm.invalid" class="btn-secondary add-btn">
+              + Agregar
+            </button>
+          </div>
+          
+          <ul class="integrantes-list">
+            <li *ngIf="integrantesTemporales.length === 0" class="no-integrantes">Aún no hay integrantes.</li>
+            <li *ngFor="let int of integrantesTemporales; let i = index">
+              <span>**{{ int.nombre_empleado }}**</span> 
+              <span class="cargo-tag">({{ int.nombre_cargo }})</span>
+              <span class="date-text">Inicio: {{ int.fecha_inicio }}</span>
+              <button type="button" (click)="quitarIntegranteTemporal(i)" class="btn-remove">X</button>
+            </li>
+          </ul>
+        </div>
+        
+        <button type="submit" class="btn-submit" [disabled]="equipoForm.invalid || integrantesTemporales.length === 0">
+          {{ editandoEquipoId ? 'Guardar Cambios del Equipo' : 'Guardar Nuevo Equipo' }}
+        </button>
+
+        <button *ngIf="editandoEquipoId" type="button" (click)="resetFormulario()" class="btn-secondary btn-cancel">
+          Cancelar Edición
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <hr *ngIf="mostrarFormulario">
+
+  <div class="equipos-grid">
+    <div *ngIf="equipos.length === 0" class="no-data">
+      <p>No hay equipos registrados. ¡Crea el primero!</p>
+    </div>
+
+    <div *ngFor="let equipo of equipos" class="equipo-card">
+      <div class="card-header">
+        <h3 class="equipo-nombre">{{ equipo.nombre_equipo }}</h3>
+        <span [class]="obtenerClaseEstado(equipo.estado)">{{ equipo.estado | uppercase }}</span>
+      </div>
+
+      <p class="institucion-text">**Institución:** {{ equipo.institucion || 'N/A' }}</p>
+      
+      <div class="card-content">
+        <div class="content-item">
+          <span class="label">📅 Creación:</span>
+          <span>{{ equipo.fecha_registro | date: 'dd/MM/yyyy' }}</span>
+        </div>
+      </div>
+      
+      <hr class="card-divider">
+
+      <div class="integrantes-detalle">
+        <h4>Integrantes ({{ equipo.integrantes_display.length }})</h4>
+        <ul>
+          <li *ngFor="let integrante of equipo.integrantes_display">
+            <span class="integrante-nombre">{{ integrante.nombre_completo }}</span>
+            <span class="integrante-cargo">({{ integrante.nombre_cargo }})</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card-footer">
+        <button class="btn-action btn-edit" (click)="iniciarEdicion(equipo)">📝 Editar</button>
+        <button class="btn-action btn-assign">📍 Asignar</button>
+      </div>
+    </div>
+  </div>
+</div>

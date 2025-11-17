@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../service/auth';
 
 
 @Component({
@@ -8,5 +9,17 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
   templateUrl: './admin-layout.html',
   styleUrl: './admin-layout.css',
+
 })
-export class AdminLayout {}
+export class AdminLayout {
+
+  constructor(
+    private AuthService: AuthService,
+    private router: Router
+  ) {}
+
+  cerrarSesion() {
+    this.AuthService.logout();
+    this.router.navigate(['/login']); 
+  }
+}

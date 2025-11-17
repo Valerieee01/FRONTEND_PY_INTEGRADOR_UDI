@@ -1,29 +1,28 @@
-<header class="topbar">Inventario Forestal Nacional</header>
+<div class="layout">
+  <header class="topbar">Inventario Forestal Nacional</header>
 
-<aside class="sidebar">
-  <nav class="nav" aria-label="Menú">
-    <a routerLink="/Conglomerados"><i class="ph ph-house-simple"></i> Inicio</a>
-    <a routerLink="/Usuarios"><i class="ph ph-tree"></i> Árboles</a>
-    <a routerLink="/Empleados">Conglomerados</a>
-    <a routerLink="/Equipos">Subparcelas</a>
-    <a routerLink="/MuestreoBotanico"><i class="ph ph-users-three"></i> Usuarios</a>
-    <a routerLink="/MuestreoDetritosMadera"><i class="ph ph-gear"></i> Configuración</a>
-    <a routerLink="/MuestreoSuelo">Empleados</a>
-    <a routerLink="/Personas">Equipos</a>
-    <a routerLink="/Subparcelas">Equipos</a>
+  <aside class="sidebar">
+    <nav class="nav">
+      <a routerLink="Dashboard"><i class="ph ph-house-simple"></i>Inicio</a>
+      <a routerLink="Conglomerados"><i class="ph ph-map-pin-simple-area"></i>Gestión Conglomerados</a>
+      <a routerLink="Subparcelas"><i class="ph ph-map-trifold"></i>Gestión Subparcelas</a>
+      <a routerLink="Usuarios"><i class="ph ph-user-check"></i>Gestión Usuarios</a>
+      <a routerLink="Personas"><i class="ph ph-person"></i>Gestión Personas</a>
+      <a routerLink="Empleados"><i class="ph ph-user-circle-plus"></i>Gestión Empleados</a>
+      <a routerLink="Equipos"><i class="ph ph-users-four"></i>Gestión Equipos</a>
+      <a routerLink="MuestreoBotanico"><i class="ph ph-tree"></i>Muestreo Botanico</a>
+      <a routerLink="MuestreoDetritosMadera"><i class="ph ph-log"></i>Muestreo Detritos Madera</a>
+      <a routerLink="MuestreoSuelo"><i class="ph ph-eyedropper"></i>Muestreo Suelo</a>
+    </nav>
 
-  </nav>
+    <button class="logout-btn" (click)="cerrarSesion()">
+      <i class="ph ph-sign-out"></i> Cerrar Sesión
+    </button>
+  </aside>
 
-  <button id="logout-btn" class="logout-btn">
-    <i class="ph ph-sign-out"></i> Cerrar Sesión
-  </button>
-</aside>
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
 
-<!-- AQUÍ CAMBIA EL CONTENIDO -->
-<main class="content">
-  <router-outlet></router-outlet>
-</main>
-
-<footer class="footer">
-  © 2024 - Inventario Forestal Nacional
-</footer>
+  <footer class="footer">© 2024 - Inventario Forestal Nacional</footer>
+</div>

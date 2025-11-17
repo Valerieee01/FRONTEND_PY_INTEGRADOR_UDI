@@ -1,1 +1,130 @@
-<p>personas works!</p>
+<div class="personas-container">
+  
+  <header class="header">
+    <h2>👤 Gestión de Personas y Entidades</h2>
+    <button (click)="mostrarFormulario = !mostrarFormulario" class="btn-primary">
+      {{ mostrarFormulario ? 'Ocultar Formulario' : 'Registrar Nueva Persona' }}
+    </button>
+  </header>
+  
+  <hr>
+
+  <div *ngIf="mostrarFormulario" class="form-section">
+    <div class="card-form">
+      <h3 class="form-title">Registro de Nueva Persona / Razón Social</h3>
+
+      <form [formGroup]="personaForm" (ngSubmit)="crearPersona()">
+        <div class="form-grid">
+          
+          <div class="form-group full-width">
+            <label for="nombre_completo_razon_social">Nombre Completo / Razón Social *</label>
+            <input id="nombre_completo_razon_social" type="text" formControlName="nombre_completo_razon_social" required>
+            <div *ngIf="personaForm.get('nombre_completo_razon_social')?.touched && personaForm.get('nombre_completo_razon_social')?.errors?.['required']" class="error-msg">
+              Este campo es obligatorio.
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="id_tipo_identificacion">Tipo de ID *</label>
+            <select id="id_tipo_identificacion" formControlName="id_tipo_identificacion" required>
+              <option value="" disabled>Seleccione...</option>
+              <option *ngFor="let tipo of tiposIdentificacion" [value]="tipo.id_tipo_identificacion">{{ tipo.nombre }}</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="numero_identificacion">Número de Identificación *</label>
+            <input id="numero_identificacion" type="text" formControlName="numero_identificacion" required>
+            <div *ngIf="personaForm.get('numero_identificacion')?.touched && personaForm.get('numero_identificacion')?.errors?.['required']" class="error-msg">
+              El número de identificación es obligatorio.
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="correo">Correo Electrónico *</label>
+            <input id="correo" type="email" formControlName="correo" required>
+            <div *ngIf="personaForm.get('correo')?.touched && personaForm.get('correo')?.errors?.['email']" class="error-msg">
+              Debe ser un correo válido.
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input id="telefono" type="text" formControlName="telefono">
+          </div>
+          
+          <div class="form-group">
+            <label for="id_ciudad">Ciudad *</label>
+            <select id="id_ciudad" formControlName="id_ciudad" required>
+              <option value="" disabled>Seleccione la ciudad...</option>
+              <option *ngFor="let ciudad of ciudades" [value]="ciudad.id_ciudad">{{ ciudad.nombre_ciudad }}</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="estado">Estado</label>
+            <select id="estado" formControlName="estado">
+              <option value="activo">Activo</option>
+              <option value="inactivo">Inactivo</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="direccion">Dirección</label>
+            <textarea id="direccion" formControlName="direccion"></textarea>
+          </div>
+
+        </div>
+        
+        <button type="submit" class="btn-submit" [disabled]="personaForm.invalid">
+          Guardar Persona
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <hr *ngIf="mostrarFormulario">
+
+  <div class="personas-grid">
+    <div *ngIf="personas.length === 0" class="no-data">
+      <p>No hay personas registradas. ¡Empieza por el registro!</p>
+    </div>
+
+    <div *ngFor="let persona of personas" class="persona-card">
+      <div class="card-header">
+        <h3 class="persona-nombre">{{ persona.nombre_completo_razon_social }}</h3>
+        <span [class]="obtenerClaseEstado(persona.estado)">{{ persona.estado | uppercase }}</span>
+      </div>
+
+      <p class="identificacion-text">
+        **{{ persona.nombre_tipo_identificacion }}:** {{ persona.numero_identificacion }}
+      </p>
+      
+      <hr class="card-divider">
+
+      <div class="card-content">
+        <div class="content-item">
+          <span class="label">📧 Correo:</span>
+          <span class="value-highlight">{{ persona.correo }}</span>
+        </div>
+        <div class="content-item">
+          <span class="label">📞 Teléfono:</span>
+          <span>{{ persona.telefono || 'N/A' }}</span>
+        </div>
+        <div class="content-item">
+          <span class="label">📍 Ciudad:</span>
+          <span>{{ persona.nombre_ciudad }}</span>
+        </div>
+        <div class="content-item">
+          <span class="label">🏠 Dirección:</span>
+          <span class="small-text">{{ persona.direccion || 'No registrada' }}</span>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <span class="fecha-registro">Reg.: {{ persona.fecha_registro | date: 'dd/MM/yy' }}</span>
+        <button class="btn-action btn-edit">📝 Editar</button>
+      </div>
+    </div>
+  </div>
+</div>

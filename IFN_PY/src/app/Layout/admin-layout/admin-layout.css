@@ -1,221 +1,111 @@
- /* Variables CSS */
-:root {
-  --bg: #eaf6ea;
-  --ink: #1f2a1f;
-  --muted: #546154;
-  --panel: #ffffff;
-  --brand: #2e7d32;
-  --danger: #c0392b;
-  --gap: 16px;
-  --radius: 12px;
-  --shadow: 0 8px 24px rgba(0, 0, 0, .06), 0 2px 6px rgba(0, 0, 0, .05);
-  --topbar: #56a05a;
-  --sidebar: #2f7a35;
-  --sidebar-ink: #eef7ee;
-  --accent: #0284c7;
-  /* Azul para editar */
+
+/* 📐 Layout general SIN SCROLL */
+html, body {
+  height: 100%;
+  overflow: hidden; /* evita scroll global */
 }
 
- 
- /* Layout principal de la aplicación */
-.app {
-  min-height: 100%;
+/* 📌 Layout general */
+.layout {
   display: grid;
-  grid-template-columns: 240px 1fr;
-  grid-template-rows: 56px auto;
+  grid-template-columns: 260px 1fr; /* Sidebar fijo */
+  grid-template-rows: 60px 1fr 50px; /* Topbar - Contenido - Footer */
   grid-template-areas:
     "sidebar topbar"
-    "sidebar main";
+    "sidebar content"
+    "sidebar footer";
+  height: 100vh;
+  background: var(--green-200);
 }
 
-.sidebar {
-  grid-area: sidebar;
-  background: var(--sidebar);
-  color: var(--sidebar-ink);
-  padding: 22px 18px;
-}
-
+/* 🔝 Topbar */
 .topbar {
   grid-area: topbar;
-  background: var(--topbar);
-  color: #fff;
+  background: var(--green-800);
+  color: white;
+  padding: 0 24px;
   display: flex;
   align-items: center;
-  padding: 10px 24px;
-  font-weight: 800;
-  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  font-size: 1.2rem;
 }
 
-.container {
-  grid-area: main;
-  padding: 18px 20px 24px;
-  width: min(1200px, 100%);
-  margin-inline: auto;
+/* 📚 Sidebar */
+.sidebar {
+  grid-area: sidebar;
+  background: var(--green-300);
+  color: white;
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 4px 0 10px rgba(0,0,0,0.15);
 }
 
-.container h1 {
-  color: var(--brand);
-  margin: 0 0 18px 0;
-  font-weight: 800;
-  font-size: 2rem;
-}
-
-/* Navegación lateral */
+/* 📌 Navegación */
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 12px
-}
-
-.nav a {
-  color: var(--sidebar-ink);
-  text-decoration: none;
-  padding: 10px 12px;
-  border-radius: 10px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
   gap: 10px;
 }
 
-.nav a:hover {
-  background: rgba(255, 255, 255, .10);
+.nav a {
+  color: var(--green-900);
+  text-decoration: none;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition);
 }
 
-/* Estilos adicionales para el botón de Cerrar Sesión */
+.nav a:hover {
+  background: var(--green-600);
+  color: var(--gray-100);
+  transform: translateX(4px);
+}
+
+/* 🔘 Botón cerrar sesión */
 .logout-btn {
-    /* Reiniciar estilos de botón */
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    border: none;
-    background: none;
-    cursor: pointer;
-    
-    /* Estilos de texto y color */
-    color: var(--sidebar-ink);
-    text-decoration: none;
-    padding: 10px 12px;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: inherit; /* Heredar el tamaño de fuente */
-    
-    transition: background-color 0.15s ease;
+  background: var(--green-700);
+  color: white;
+  border: none;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition);
 }
 
 .logout-btn:hover {
-    background: rgba(255, 255, 255, .15); /* Ligeramente más oscuro en hover */
+  background: var(--gray-500);
+  transform: translateX(4px);
 }
 
-/* Estilos de tarjetas (Formulario y Tabla) */
-.form-card,
-.table-card {
-  background: var(--panel);
-  padding: 18px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  margin: 10px auto 22px auto;
-  max-width: 980px;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+/* 📄 Zona de contenido */
+.content {
+  grid-area: content;
+  overflow-y: auto; /* solo el contenido hace scroll */
+  padding: 18px 26px;
+  background: var(--green-100);
 }
 
-.table-card {
-  max-width: 1200px;
-}
-
-.form-card h2,
-.table-card h2 {
-  margin: 0 0 12px 0;
-  font-size: 18px;
-  color: var(--brand);
-}
-
-/* Layout del formulario */
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--gap);
-}
-
-.form-grid .full {
-  grid-column: 1 / -1;
-}
-
-.field label {
-  display: block;
-  font-weight: 600;
-  font-size: 13px;
-  color: #314432;
-  margin-bottom: 6px;
-}
-
-.field input,
-.field select,
-.field textarea {
-  width: 100%;
-  padding: 9px 10px;
-  border: 1px solid #d8e6d8;
-  border-radius: 8px;
-  background: #fbfffb;
-  font-size: 14px;
-  color: var(--ink);
-  box-sizing: border-box;
-}
-
-.form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: 14px;
-}
-
-/* Botones */
-.btn-primary,
-.btn-secondary,
-.action-btn.delete-btn {
-  padding: 10px 16px;
-  border-radius: 8px;
-  border: 0;
-  cursor: pointer;
-  font-weight: 700;
-  color: #fff;
-  transition: transform .12s ease, box-shadow .12s ease;
-}
-
-.btn-primary {
-  background: var(--brand);
-}
-
-.btn-secondary {
-  background: #6b776b;
-}
-
-.action-btn.delete-btn {
-  background: var(--danger);
-}
-
-.btn-primary:active,
-.btn-secondary:active,
-.action-btn.delete-btn:active {
-  transform: translateY(1px);
-}
-/* ------------------ Footer ------------------ */
+/* 🦶 Footer */
 .footer {
-  margin-top: 14px;
-  /* Separación respecto al contenido */
-  background: #e3ebe3;
-  /* Fondo gris verdoso claro */
-  border: 1px solid var(--ring);
-  /* Borde */
-  border-radius: 10px;
-  /* Bordes redondeados */
-  padding: 10px 14px;
-  /* Espaciado interno */
-  color: #4e5b4e;
-  /* Color de texto */
-  text-align: center;
-  /* Centrado */
-  font-size: 14px
-    /* Tamaño pequeño */
+  grid-area: footer;
+  background: var(--green-700);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
 }

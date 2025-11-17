@@ -1,76 +1,179 @@
+/* Contenedor de filtros */
+.filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
 
-.main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 20px;
-  }
+.filters input {
+  padding: 10px 12px;
+  border: 1px solid var(--green-300);
+  border-radius: var(--radius);
+  font-size: 14px;
+  width: 220px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
 
-  .filters {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 15px;
-  }
+.filters input:focus {
+  border-color: var(--green-600);
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+  outline: none;
+}
 
-  .filters input {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 14px;
-      width: 200px;
-  }
+/* Contenedor de tabla */
+.table-container {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 20px;
+  overflow-x: auto;
+  box-shadow: var(--shadow-light);
+}
 
-  .table-container {
-      flex: 1;
-      margin-top: 20px;
-      background: #fff;
-      border-radius: 10px;
-      padding: 20px;
-      overflow-x: auto;
-  }
+/* Título de tabla */
+.table-container h2 {
+  color: var(--green-800);
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
 
-  table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 14px;
-  }
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
 
-  table thead {
-      background-color: var(--sidebar);
-      color: #fff;
-  }
+thead {
+  background-color: var(--green-700);
+  color: var(--white);
+}
 
-  table th,
-  table td {
-      padding: 12px;
-      border-bottom: 1px solid #ddd;
-  }
+th, td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--gray-200);
+  text-align: left;
+}
 
-  table tr:hover {
-      background-color: #f1f1f1;
-  }
+tr:hover {
+  background-color: var(--green-50);
+}
 
-  .table-actions {
-      margin-top: 15px;
-      display: flex;
-      gap: 10px;
-  }
+/* Botones dentro de la tabla */
+.table-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
 
-  .table-actions button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: bold;
-      color: white;
-  }
+.table-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--white);
+  transition: background-color var(--transition);
+}
 
-  .btn-pdf {
-      background-color: #c779cf;
-  }
+.btn-pdf {
+  background-color: var(--info);
+}
 
-  .btn-delete {
-      background-color: var(--sidebar);
-  }
+.btn-pdf:hover {
+  background-color: #026aa3;
+}
+
+.btn-delete {
+  background-color: var(--danger);
+}
+
+.btn-delete:hover {
+  background-color: #a93226;
+}
+
+.btn-view {
+  background-color: var(--green-600);
+}
+
+.btn-view:hover {
+  background-color: var(--green-700);
+}
+
+/* Fondo del modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Modal en sí */
+.modal {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 25px 30px;
+  width: min(600px, 90%);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-medium);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+}
+
+/* Título del modal */
+.modal h3 {
+  color: var(--green-800);
+  margin: 0 0 10px 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* Botón de cerrar modal */
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--gray-700);
+  font-weight: 700;
+}
+
+.modal-close:hover {
+  color: var(--green-700);
+}
+
+/* Contenido dentro del modal */
+.modal-content p {
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
+.modal-content span {
+  font-weight: 600;
+  color: var(--green-800);
+}
+
+.btn-view {
+  background-color: var(--green-600);
+  color: var(--white);
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.btn-view:hover {
+  background-color: var(--green-700);
+}
