@@ -97,7 +97,7 @@ hr {
 }
 
 .btn-submit {
-    background-color: var(--success);
+    background-color: var(--green-600);
     color: var(--white);
     padding: 12px 25px;
     border: none;
@@ -106,10 +106,11 @@ hr {
     font-weight: 600;
     margin-top: 15px;
     transition: background-color 0.3s;
+    width: 200px;
 }
 
 .btn-submit:hover:not(:disabled) {
-    background-color: var(--success-dark);
+    background-color: var(--gray-700);
 }
 
 .btn-submit:disabled {

@@ -81,9 +81,14 @@ hr {
     outline: none;
     box-shadow: 0 0 0 2px rgba(var(--blue-rgb), 0.2);
 }
+.container-botones{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 .btn-submit {
-    background-color: var(--success);
+    background-color: var(--green-600);
     color: var(--white);
     padding: 12px 25px;
     border: none;
@@ -92,10 +97,11 @@ hr {
     font-weight: 600;
     margin-top: 15px;
     transition: background-color 0.3s;
+    width: 200px;
 }
 
 .btn-submit:hover:not(:disabled) {
-    background-color: var(--success-dark);
+    background-color: var(--gray-700);
 }
 
 .btn-submit:disabled {
@@ -107,6 +113,8 @@ hr {
     background-color: var(--danger);
     color: var(--white);
     margin-left: 10px;
+    width: 200px;
+
 }
 
 .btn-cancel:hover {

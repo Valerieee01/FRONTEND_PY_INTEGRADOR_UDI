@@ -109,12 +109,10 @@ body {
     box-shadow: var(--shadow);
     padding: 14px 16px;
     
-    /* 🛑 CRÍTICO: Asegurarse de que el widget no se expanda más allá de su límite */
     height: 100%; /* Ocupa la altura del .widgets (500px) */
     position: relative; /* Importante para el responsive del canvas */
 }
 
-/* 🛑 CRÍTICO: Limitar el tamaño del canvas dentro del widget */
 .widget canvas {
     max-height: 90%; 
     display: block; /* Asegura el correcto flujo */
@@ -133,14 +131,16 @@ table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
+    color: var(--white);
+    background-color: var(--green-600);
 }
 
 thead th {
     text-align: left;
     padding: 14px 16px 10px;
     background: #f5fbf5;
+    color: var( --gray-900);
     border-bottom: 1px solid var(--ring);
-    color: var(--brand);
 }
 
 tbody td {
@@ -153,7 +153,12 @@ tbody tr:last-child td {
 }
 
 
-
+.btn-content{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    justify-content: space-between;
+}
 
 /* ------------------ Responsive ------------------ */
 @media (max-width:980px) {

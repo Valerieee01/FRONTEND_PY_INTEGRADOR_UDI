@@ -54,14 +54,15 @@
             </select>
           </div>
         </div>
-        
-        <button type="submit" class="btn-submit" [disabled]="usuarioForm.invalid">
-          {{ editandoUsuarioId ? 'Guardar Cambios del Usuario' : 'Crear Usuario' }}
-        </button>
-
-        <button *ngIf="mostrarFormulario" type="button" (click)="resetFormulario()" class="btn-secondary btn-cancel">
-          Cancelar
-        </button>
+        <div class="container-botones">
+          <button type="submit" class="btn-submit" [disabled]="usuarioForm.invalid">
+            {{ editandoUsuarioId ? 'Guardar Cambios del Usuario' : 'Crear Usuario' }}
+          </button>
+  
+          <button *ngIf="mostrarFormulario" type="button" (click)="resetFormulario()" class="btn-secondary btn-cancel">
+            Cancelar
+          </button>
+        </div>
       </form>
     </div>
   </div>

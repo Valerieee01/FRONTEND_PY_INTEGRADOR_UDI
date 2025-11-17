@@ -56,7 +56,7 @@ export class InicioSesion {
           text: 'Inicio de sesión correcto',
           confirmButtonColor: '#2e7d32'
         }).then(() => {
-        this.router.navigate(['Conglomerados']);  
+        this.router.navigate(['Inicio']);  
       });
       },
       error: (err) => {

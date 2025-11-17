@@ -1,4 +1,4 @@
-@import '../equipos/equipos.css'; 
+@import '../equipos/equipos.css';
 
 
 /* ===================================================== */
@@ -20,7 +20,8 @@
 
 .main-layout {
     display: grid;
-    grid-template-columns: 400px 1fr; /* Columna izquierda fija, derecha flexible */
+    grid-template-columns: 400px 1fr;
+    /* Columna izquierda fija, derecha flexible */
     gap: 30px;
 }
 
@@ -34,14 +35,18 @@
     gap: 20px;
 }
 
-.filter-card, .list-container, .detail-card {
+.filter-card,
+.list-container,
+.detail-card {
     background: var(--white);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     padding: 20px;
 }
 
-.filter-card h3, .list-container h3, .detail-card h2 {
+.filter-card h3,
+.list-container h3,
+.detail-card h2 {
     color: var(--gray-700);
     border-bottom: 1px solid var(--gray-200);
     padding-bottom: 10px;
@@ -58,20 +63,28 @@
     margin-top: 10px;
 }
 
-.filter-card input[type="text"], .input-range input {
+.filter-card input[type="text"],
+.input-range input {
     padding: 8px;
     border: 1px solid var(--gray-300);
     border-radius: var(--radius-sm);
-    box-sizing: border-box; /* Asegura que padding no afecte el width total */
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    /* Asegura que padding no afecte el width total */
 }
 
 .filter-card input[type="text"] {
     width: 100%;
 }
 
-.altitud-group label {
-    margin-top: 15px;
+.altitud-group{
+    margin-top: 20px;
 }
+
+
+
+
 
 .input-range {
     display: flex;
@@ -81,6 +94,7 @@
 
 .input-range input {
     flex-grow: 1;
+    border-radius: 10px;
 }
 
 .filter-actions {
@@ -88,41 +102,6 @@
     gap: 10px;
     margin-top: 20px;
 }
-
-/* Estilos de Botones */
-.btn-primary.btn-filter, .btn-secondary.btn-clear {
-    padding: 10px 15px;
-    border: none;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    font-weight: 600;
-    flex-grow: 1;
-    transition: background-color 0.3s;
-}
-
-.btn-primary.btn-filter {
-    background-color: var(--primary-blue);
-    color: var(--white);
-}
-
-.btn-primary.btn-filter:hover:not(:disabled) {
-    background-color: var(--primary-dark);
-}
-
-.btn-secondary.btn-clear {
-    background-color: var(--gray-500);
-    color: var(--white);
-}
-
-.btn-secondary.btn-clear:hover {
-    background-color: var(--secondary-gray);
-}
-
-.btn-primary.btn-filter:disabled {
-    background-color: var(--gray-300);
-    cursor: not-allowed;
-}
-
 
 /* --- Lista de Conglomerados --- */
 .conglomerado-list {
@@ -169,7 +148,8 @@
 }
 
 .conglomerado-list li.selected .list-detail {
-    color: var(--gray-100); /* Sobreescribe el color para la selección */
+    color: var(--gray-100);
+    /* Sobreescribe el color para la selección */
 }
 
 .no-data {
@@ -269,7 +249,8 @@
     border-bottom: 2px solid var(--gray-200);
 }
 
-.subparcela-table th, .subparcela-table td {
+.subparcela-table th,
+.subparcela-table td {
     padding: 12px 15px;
 }
 

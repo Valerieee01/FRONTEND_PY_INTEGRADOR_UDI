@@ -31,7 +31,7 @@
     --danger: #c0392b;     /* Para errores o alertas */
     --warning: #f59e0b;    /* Para alertas o atención */
     --info: #0284c7;       /* Para información destacada */
-    
+    --danger-dark: #56130c;
     /* Variables de diseño */
     --radius: 12px;         /* Bordes redondeados */
     --transition: 0.25s ease;  /* Transiciones suaves */

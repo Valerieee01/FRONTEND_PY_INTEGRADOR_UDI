@@ -18,6 +18,17 @@ html, body {
   background: var(--green-200);
 }
 
+.logo{
+  margin-left: 60px;
+  margin-top: 20px;
+}
+
+.logo-img {
+    width: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--green-500);
+}
+
 /* 🔝 Topbar */
 .topbar {
   grid-area: topbar;
