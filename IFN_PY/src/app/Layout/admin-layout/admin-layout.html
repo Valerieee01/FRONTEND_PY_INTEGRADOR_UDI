@@ -1,0 +1,29 @@
+<header class="topbar">Inventario Forestal Nacional</header>
+
+<aside class="sidebar">
+  <nav class="nav" aria-label="Menú">
+    <a routerLink="/Conglomerados"><i class="ph ph-house-simple"></i> Inicio</a>
+    <a routerLink="/Usuarios"><i class="ph ph-tree"></i> Árboles</a>
+    <a routerLink="/Empleados">Conglomerados</a>
+    <a routerLink="/Equipos">Subparcelas</a>
+    <a routerLink="/MuestreoBotanico"><i class="ph ph-users-three"></i> Usuarios</a>
+    <a routerLink="/MuestreoDetritosMadera"><i class="ph ph-gear"></i> Configuración</a>
+    <a routerLink="/MuestreoSuelo">Empleados</a>
+    <a routerLink="/Personas">Equipos</a>
+    <a routerLink="/Subparcelas">Equipos</a>
+
+  </nav>
+
+  <button id="logout-btn" class="logout-btn">
+    <i class="ph ph-sign-out"></i> Cerrar Sesión
+  </button>
+</aside>
+
+<!-- AQUÍ CAMBIA EL CONTENIDO -->
+<main class="content">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="footer">
+  © 2024 - Inventario Forestal Nacional
+</footer>

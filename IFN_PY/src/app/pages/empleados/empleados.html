@@ -1,0 +1,120 @@
+<p>empleados works!</p>
+<!-- Main -->
+<div class="main">
+    <header>
+        <h1>Gestión Empleados</h1>
+    </header>
+
+    <!-- ======== SECCIÓN EMPLEADOS ======== -->
+    <section class="card">
+        <h2>Gestión de Empleados</h2>
+        <form id="employeeForm" class="form">
+            <input type="hidden" id="employeeId">
+            <div class="field">
+                <label>Nombre completo</label>
+                <input type="text" id="employeeName" placeholder="Ej. María López" required>
+            </div>
+            <div class="field">
+                <label>Rol</label>
+                <select id="employeeRole" required>
+                    <option value="">Seleccione rol</option>
+                    <option value="Jefe">Jefe de brigada</option>
+                    <option value="Técnico">Técnico auxiliar</option>
+                    <option value="Botánico">Botánico</option>
+                    <option value="Coinvestigador">Coinvestigador</option>
+                </select>
+            </div>
+            <div class="actions">
+                <button type="submit" class="btn">Guardar empleado</button>
+                <button type="button" id="clearEmployee" class="btn secondary">Limpiar</button>
+            </div>
+        </form>
+
+        <h3>Empleados registrados</h3>
+        <table id="employeeTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <!-- ======== SECCIÓN ASIGNACIÓN DE EQUIPOS ======== -->
+    <section class="card">
+        <h2>Asignación de Equipos</h2>
+        <form id="assignForm" class="form">
+            <div class="field">
+                <label>ID de equipo</label>
+                <input type="text" id="eqId" readonly>
+            </div>
+
+            <div class="field">
+                <label>Jefe de brigada</label>
+                <select id="jefeSelect" required></select>
+            </div>
+
+            <div class="field">
+                <label>Técnico auxiliar</label>
+                <select id="tecnicoSelect" required></select>
+            </div>
+
+            <div class="field">
+                <label>Botánico</label>
+                <select id="botanicoSelect" required></select>
+            </div>
+
+            <div class="field">
+                <label>Coinvestigador</label>
+                <select id="coinvestSelect" required></select>
+            </div>
+
+            <div class="field">
+                <label>Conglomerado</label>
+                <input type="text" id="conglomerado" placeholder="Ej. C-01" required>
+            </div>
+
+            <div class="field">
+                <label>Subparcela</label>
+                <input type="text" id="subparcela" placeholder="Ej. SP-01" required>
+            </div>
+
+            <div class="field">
+                <label>Fecha inicio</label>
+                <input type="date" id="fechaInicio" required>
+            </div>
+
+            <div class="field">
+                <label>Fecha fin</label>
+                <input type="date" id="fechaFin" required>
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="btn">Guardar equipo</button>
+                <button type="button" id="clearAssign" class="btn secondary">Limpiar</button>
+            </div>
+        </form>
+
+        <h3>Equipos registrados</h3>
+        <table id="equiposTable">
+            <thead>
+                <tr>
+                    <th>ID Equipo</th>
+                    <th>Jefe</th>
+                    <th>Técnico</th>
+                    <th>Botánico</th>
+                    <th>Coinvestigador</th>
+                    <th>Conglomerado</th>
+                    <th>Subparcela</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+</div>
