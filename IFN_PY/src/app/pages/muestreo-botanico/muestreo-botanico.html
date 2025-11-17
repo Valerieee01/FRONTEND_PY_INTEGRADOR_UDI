@@ -1,1 +1,116 @@
-<p>muestreo-botanico works!</p>
+<div class="muestreo-container">
+    <header class="header">
+        <h2>🌳 Registro de Muestreo Botánico (Parcelas)</h2>
+    </header>
+
+    <div class="card-form">
+        <form [formGroup]="muestreoForm" (ngSubmit)="registrarMuestreo()">
+            
+            <h3 class="form-title">Datos del Muestreo</h3>
+            <div class="form-grid-muestreo">
+                
+                <div class="form-group">
+                    <label for="id_subparcela">Subparcela *</label>
+                    <select id="id_subparcela" formControlName="id_subparcela" required>
+                        <option value="" disabled selected>Seleccione Subparcela</option>
+                        <option *ngFor="let p of subparcelas" [value]="p.id_subparcela">
+                            {{ p.nombre }} - ({{ p.ubicacion }})
+                        </option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fecha_muestreo">Fecha de Muestreo *</label>
+                    <input id="fecha_muestreo" type="date" formControlName="fecha_muestreo" required>
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="observaciones_muestreo">Observaciones Generales</label>
+                <textarea id="observaciones_muestreo" formControlName="observaciones"></textarea>
+            </div>
+            
+            <hr>
+
+            <div class="individuos-section">
+                <h3 class="form-title">
+                    Individuos Registrados (Árboles, Palmas, Arbustos)
+                </h3>
+                
+                <div formArrayName="individuos" class="individuos-list">
+                    <div *ngFor="let individuoForm of individuos.controls; let i = index" [formGroupName]="i" class="individuo-card">
+                        
+                        <div class="individuo-header">
+                            <h4>Individuo #{{ individuoForm.get('numero')?.value }}</h4>
+                            <button type="button" (click)="removerIndividuo(i)" class="btn-remove" [disabled]="individuos.length === 1">
+                                Eliminar
+                            </button>
+                        </div>
+
+                        <div class="form-grid-individuo">
+                            
+                            <div class="form-group">
+                                <label for="especie-{{i}}">Especie *</label>
+                                <input id="especie-{{i}}" type="text" formControlName="especie" required placeholder="Nombre científico">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dap-{{i}}">DAP (cm) *</label>
+                                <input id="dap-{{i}}" type="number" formControlName="dap" step="0.01" min="0" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="altura_total-{{i}}">Altura Total (m) *</label>
+                                <input id="altura_total-{{i}}" type="number" formControlName="altura_total" step="0.01" min="0" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="azimut-{{i}}">Azimut (°)</label>
+                                <input id="azimut-{{i}}" type="number" formControlName="azimut" min="0" max="360" placeholder="0 - 360">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="distancia-{{i}}">Distancia (m)</label>
+                                <input id="distancia-{{i}}" type="number" formControlName="distancia" step="0.01" min="0">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="estado-{{i}}">Estado *</label>
+                                <select id="estado-{{i}}" formControlName="estado" required>
+                                    <option value="" disabled selected>Seleccione estado</option>
+                                    <option *ngFor="let e of estados" [value]="e">{{ e }}</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="categoria_dap-{{i}}">Categoría DAP *</label>
+                                <select id="categoria_dap-{{i}}" formControlName="categoria_dap" required>
+                                    <option value="" disabled selected>Seleccione categoría</option>
+                                    <option *ngFor="let c of categoriasDap" [value]="c">{{ c }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="obs_individuo-{{i}}">Observaciones Individuo</label>
+                            <textarea id="obs_individuo-{{i}}" formControlName="observaciones" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" (click)="agregarIndividuo()" class="btn-secondary add-individuo-btn">
+                    ➕ Añadir otro Individuo
+                </button>
+            </div>
+
+            <div class="form-footer">
+                <button type="submit" class="btn-submit" [disabled]="muestreoForm.invalid">
+                    💾 Registrar Muestreo Botánico
+                </button>
+                <button type="button" (click)="resetFormulario()" class="btn-secondary btn-cancel">
+                    Limpiar Formulario
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

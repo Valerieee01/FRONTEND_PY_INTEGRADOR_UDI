@@ -1,0 +1,105 @@
+<main class="main-content-only">
+    <div class="container">
+        <h1 class="dashboard-title">📊 Dashboard de Inventario Forestal Nacional</h1>
+
+        <section class="filter-controls form-card mb-4 p-4 rounded-lg bg-white shadow-md">
+            <h2 class="text-lg font-semibold mb-3 border-b-2 pb-2 text-brand">Filtrar Datos</h2>
+            
+            <form [formGroup]="filtroForm">
+                <div class="form-grid grid gap-4 grid-cols-1 md:grid-cols-3">
+                    <div class="field">
+                        <label for="filtroEspecie" class="text-sm font-medium text-gray-700">Especie</label>
+                        <select id="filtroEspecie" formControlName="filtroEspecie" class="p-2 border border-gray-300 rounded-md">
+                            <option value="">Todas las especies</option>
+                            <option *ngFor="let especie of uniqueEspecies" [value]="especie">{{ especie }}</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="filtroConglomerado" class="text-sm font-medium text-gray-700">Conglomerado</label>
+                        <select id="filtroConglomerado" formControlName="filtroConglomerado" class="p-2 border border-gray-300 rounded-md">
+                            <option value="">Todos los conglomerados</option>
+                            <option *ngFor="let c of uniqueConglomerados" [value]="c">{{ c }}</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="filtroSubparcela" class="text-sm font-medium text-gray-700">Subparcela</label>
+                        <select id="filtroSubparcela" formControlName="filtroSubparcela" class="p-2 border border-gray-300 rounded-md">
+                            <option value="">Todas las subparcelas</option>
+                            <option *ngFor="let s of uniqueSubparcelas" [value]="s">{{ s }}</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end mt-4">
+                    <button id="generar-reporte-btn" (click)="generateReport()" class="btn-primary flex items-center gap-2">
+                        <i class="ph ph-file-pdf"></i> Generar Reporte
+                    </button>
+                    <button id="aplicar-filtros-btn" (click)="applyFilters()" class="btn-secondary ml-3 flex items-center gap-2">
+                        <i class="ph ph-funnel"></i> Aplicar Filtros
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <hr>
+        
+        <section class="kpis">
+            <article class="kpi">
+                <h4>Total Conglomerados</h4>
+                <p class="value" id="kpi-conglomerados">{{ kpis.totalConglomerados }}</p>
+            </article>
+            <article class="kpi">
+                <h4>Total Subparcelas</h4>
+                <p class="value" id="kpi-subparcelas">{{ kpis.totalSubparcelas }}</p>
+            </article>
+            <article class="kpi">
+                <h4>Total Árboles</h4>
+                <p class="value" id="kpi-arboles">{{ kpis.totalArboles }}</p>
+            </article>
+            <article class="kpi">
+                <h4>Total Especies</h4>
+                <p class="value" id="kpi-especies">{{ kpis.totalEspecies }}</p>
+            </article>
+        </section>
+
+        <section class="widgets">
+            <article class="widget">
+                <h3>Gráfico de barras – Top 3 especies</h3>
+                <canvas #barTopEspeciesCanvas id="barTopEspecies"></canvas>
+            </article>
+
+            <article class="widget">
+                <h3>Gráfico circular – Estado fitosanitario</h3>
+                <canvas #pieEstadoCanvas id="pieEstado"></canvas>
+            </article>
+        </section>
+
+        <section class="table-card" aria-label="Registros filtrados">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Conglomerado</th>
+                        <th>Subparcela</th>
+                        <th>Especie</th>
+                        <th>DAP (cm)</th>
+                        <th>Altura (m)</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="filteredArboles.length === 0">
+                        <td colspan="6" class="text-center py-4 text-gray-500">No se encontraron registros que coincidan con los filtros.</td>
+                    </tr>
+                    <tr *ngFor="let arbol of filteredArboles">
+                        <td>{{ arbol.conglomerado }}</td>
+                        <td>{{ arbol.subparcela }}</td>
+                        <td>{{ arbol.especie }}</td>
+                        <td>{{ arbol.dap }}</td>
+                        <td>{{ arbol.altura }}</td>
+                        <td [class]="getEstadoClase(arbol.estado) + ' font-semibold'">{{ arbol.estado }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</main>

@@ -1,53 +1,110 @@
-<div class="table-container">
-  <div class="filters">
-    <input type="text" [(ngModel)]="filtroPalabra" placeholder="Buscar por palabra clave...">
-    <input type="text" [(ngModel)]="filtroCodigo" placeholder="Buscar por código...">
-    <input type="text" [(ngModel)]="filtroID" placeholder="Buscar por ID...">
-  </div>
+<div class="dashboard-container">
+    <header class="dashboard-header">
+        <h1>🗺️ Gestión y Visualización de Conglomerados</h1>
+    </header>
 
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Código</th>
-        <th>Latitud</th>
-        <th>Longitud</th>
-        <th>Altitud</th>
-        <th>Fecha</th>
-        <th>Observaciones</th>
-        <th>Acción</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let c of conglomeradosFiltrados">
-        <td>{{c.id_conglomerado}}</td>
-        <td>{{c.codigo}}</td>
-        <td>{{c.latitud}}</td>
-        <td>{{c.longitud}}</td>
-        <td>{{c.altitud}}</td>
-        <td>{{c.fecha}}</td>
-        <td>{{c.observaciones}}</td>
-        <td>
-          <button class="btn-view" (click)="verConglomerado(c)">Ver</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <div class="main-layout">
+        
+        <div class="sidebar">
+            <div class="filter-card">
+                <h3>🔍 Filtros de Búsqueda</h3>
+                <form [formGroup]="filtroForm" (ngSubmit)="cargarConglomerados()">
+                    
+                    <div class="form-group">
+                        <label for="busqueda">Código o Palabra clave</label>
+                        <input id="busqueda" type="text" formControlName="busqueda" placeholder="Ej: CGL001, Bosque">
+                    </div>
 
-<!-- Modal -->
-<div class="modal-overlay" *ngIf="conglomeradoSeleccionado">
-  <div class="modal">
-    <button class="modal-close" (click)="cerrarModal()">✕</button>
-    <h3>Detalles del Conglomerado</h3>
-    <div class="modal-content">
-      <p><strong>ID:</strong> {{conglomeradoSeleccionado.id_conglomerado}}</p>
-      <p><strong>Código:</strong> {{conglomeradoSeleccionado.codigo}}</p>
-      <p><strong>Latitud:</strong> {{conglomeradoSeleccionado.latitud}}</p>
-      <p><strong>Longitud:</strong> {{conglomeradoSeleccionado.longitud}}</p>
-      <p><strong>Altitud:</strong> {{conglomeradoSeleccionado.altitud}}</p>
-      <p><strong>Fecha:</strong> {{conglomeradoSeleccionado.fecha}}</p>
-      <p><strong>Observaciones:</strong> {{conglomeradoSeleccionado.observaciones}}</p>
+                    <div class="altitud-group">
+                        <label>Rango de Altitud (m)</label>
+                        <div class="input-range">
+                            <input type="number" formControlName="altitudMin" placeholder="Mín. Altitud">
+                            <span>a</span>
+                            <input type="number" formControlName="altitudMax" placeholder="Máx. Altitud">
+                        </div>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button type="submit" class="btn-primary btn-filter" [disabled]="busquedaControl?.invalid">Aplicar Filtros</button>
+                        <button type="button" class="btn-secondary btn-clear" (click)="limpiarFiltros()">Limpiar</button>
+                    </div>
+                </form>
+            </div>
+            
+            <hr>
+
+            <div class="list-container">
+                <h3>Lista de Conglomerados ({{ conglomerados.length }})</h3>
+                <div *ngIf="conglomerados.length === 0" class="no-data">
+                    No se encontraron conglomerados con los filtros aplicados.
+                </div>
+                
+                <ul class="conglomerado-list">
+                    <li *ngFor="let c of conglomerados" 
+                        [class.selected]="c.id_conglomerado === conglomeradoSeleccionado?.id_conglomerado"
+                        (click)="seleccionarConglomerado(c)">
+                        <span class="list-code">{{ c.codigo }}</span>
+                        <span class="list-detail">Alt: {{ c.altitud }} m | Fecha: {{ c.fecha }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-detail">
+            <div *ngIf="!conglomeradoSeleccionado" class="placeholder-card">
+                <h2>📊 Seleccione un Conglomerado</h2>
+                <p>Haga clic en un ítem de la izquierda para ver su detalle geográfico y la lista de subparcelas asociadas.</p>
+            </div>
+
+            <div *ngIf="conglomeradoSeleccionado" class="detail-card">
+                <h2 class="detail-title">Detalle: {{ conglomeradoSeleccionado.codigo }}</h2>
+                
+                <div class="conglomerado-data-grid">
+                    <div class="data-item">
+                        <span class="data-label">Código:</span>
+                        <span class="data-value">{{ conglomeradoSeleccionado.codigo }}</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Fecha Muestreo:</span>
+                        <span class="data-value">{{ conglomeradoSeleccionado.fecha }}</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Altitud:</span>
+                        <span class="data-value">{{ conglomeradoSeleccionado.altitud }} m</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Coordenadas:</span>
+                        <span class="data-value">{{ conglomeradoSeleccionado.latitud }}, {{ conglomeradoSeleccionado.longitud }}</span>
+                    </div>
+                </div>
+                
+                <div class="observaciones-box">
+                    <span class="data-label">Observaciones:</span>
+                    <p>{{ conglomeradoSeleccionado.observaciones || 'N/A' }}</p>
+                </div>
+
+                <hr>
+
+                <h3 class="subparcela-title">Subparcelas Asociadas ({{ subparcelas.length }})</h3>
+                <table class="subparcela-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Área (m²)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let s of subparcelas">
+                            <td>{{ s.id_subparcela }}</td>
+                            <td>{{ s.nombre }}</td>
+                            <td>{{ s.tipo }}</td>
+                            <td>{{ s.area }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

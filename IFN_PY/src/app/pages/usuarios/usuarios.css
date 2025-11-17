@@ -1,0 +1,232 @@
+@import '../equipos/equipos.css'; 
+
+.usuarios-container {
+    padding: 30px;
+    background-color: var(--gray-50);
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.header h2 {
+    color: var(--blue-800); /* Usando un color diferente (azul) para distinguir Usuarios */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--gray-300);
+    margin: 20px 0;
+}
+
+/* ----------------------------------- */
+/* 1. Estilos del Formulario */
+/* ----------------------------------- */
+
+.form-section {
+    margin-bottom: 30px;
+}
+
+.card-form {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+}
+
+.form-title {
+    color: var(--blue-700);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--gray-100);
+    padding-bottom: 10px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: var(--gray-700);
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-sm);
+    font-size: 1em;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--blue-500);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(var(--blue-rgb), 0.2);
+}
+
+.btn-submit {
+    background-color: var(--success);
+    color: var(--white);
+    padding: 12px 25px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    background-color: var(--success-dark);
+}
+
+.btn-submit:disabled {
+    background-color: var(--gray-400);
+    cursor: not-allowed;
+}
+
+.btn-cancel {
+    background-color: var(--danger);
+    color: var(--white);
+    margin-left: 10px;
+}
+
+.btn-cancel:hover {
+    background-color: var(--danger-dark);
+}
+
+.error-msg {
+    color: var(--danger);
+    font-size: 0.85em;
+    margin-top: 5px;
+}
+
+/* ----------------------------------- */
+/* 2. Estilos de las Cards (Lista de Usuarios) */
+/* ----------------------------------- */
+
+.usuarios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.usuario-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-light);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    border-left: 6px solid var(--blue-500); /* Distingue las cards de Usuario */
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.usuario-nombre {
+    color: var(--blue-700);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.4em;
+    line-height: 1.2;
+}
+
+.rol-text {
+    color: var(--secondary-dark);
+    font-size: 1.1em;
+    margin-top: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--gray-200);
+}
+
+.card-divider {
+    border: 0;
+    height: 1px;
+    background-color: var(--gray-100);
+    margin: 15px 0;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.content-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95em;
+}
+
+.label {
+    font-weight: 500;
+    color: var(--gray-600);
+}
+
+.value-highlight {
+    font-weight: 600;
+    color: var(--info); 
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: auto; 
+    padding-top: 15px;
+    border-top: 1px dashed var(--gray-200);
+}
+
+/* --- Estilos de Estado --- */
+.estado-activo {
+    background-color: var(--success);
+    color: var(--white);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8em;
+    font-weight: 700;
+}
+
+.estado-inactivo {
+    background-color: var(--danger);
+    color: var(--white);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8em;
+    font-weight: 700;
+}
+
+.no-data {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    background-color: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    color: var(--gray-500);
+}

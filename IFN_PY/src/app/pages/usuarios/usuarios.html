@@ -1,1 +1,106 @@
-<p>usuarios works!</p>
+<div class="usuarios-container">
+  
+  <header class="header">
+    <h2>👤 Gestión de Usuarios del Sistema</h2>
+    <button (click)="gestionarVisibilidadFormulario()" class="btn-primary">
+      {{ mostrarFormulario ? 'Ocultar Formulario' : 'Crear Nuevo Usuario' }}
+    </button>
+  </header>
+  
+  <hr>
+
+  <div *ngIf="mostrarFormulario" class="form-section">
+    <div class="card-form">
+      <h3 class="form-title">
+        {{ editandoUsuarioId ? '📝 Editando Usuario' : 'Registrar Nuevo Usuario' }}
+      </h3>
+
+      <form [formGroup]="usuarioForm" (ngSubmit)="gestionarUsuario()">
+        <div class="form-grid">
+          
+          <div class="form-group">
+            <label for="nombreCompleto">Nombre Completo *</label>
+            <input id="nombreCompleto" type="text" formControlName="nombreCompleto" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="correo">Correo Electrónico *</label>
+            <input id="correo" type="email" formControlName="correo" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="contrasena">
+                {{ editandoUsuarioId ? 'Contraseña (Dejar vacío para no cambiar)' : 'Contraseña *' }}
+            </label>
+            <input id="contrasena" type="password" formControlName="contrasena" [required]="!editandoUsuarioId">
+            <div *ngIf="usuarioForm.get('contrasena')?.touched && usuarioForm.get('contrasena')?.errors?.['minlength']" class="error-msg">
+              La contraseña debe tener al menos 4 caracteres.
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="id_rol">Rol *</label>
+            <select id="id_rol" formControlName="id_rol" required>
+              <option value="" disabled selected>Seleccione el rol...</option>
+              <option *ngFor="let rol of roles" [value]="rol.id_rol">{{ rol.nombre_rol }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="estado">Estado</label>
+            <select id="estado" formControlName="estado">
+              <option value="activo">Activo</option>
+              <option value="inactivo">Inactivo</option>
+            </select>
+          </div>
+        </div>
+        
+        <button type="submit" class="btn-submit" [disabled]="usuarioForm.invalid">
+          {{ editandoUsuarioId ? 'Guardar Cambios del Usuario' : 'Crear Usuario' }}
+        </button>
+
+        <button *ngIf="mostrarFormulario" type="button" (click)="resetFormulario()" class="btn-secondary btn-cancel">
+          Cancelar
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <hr *ngIf="mostrarFormulario">
+
+  <div class="usuarios-grid">
+    <div *ngIf="usuarios.length === 0" class="no-data">
+      <p>No hay usuarios registrados.</p>
+    </div>
+
+    <div *ngFor="let usuario of usuarios" class="usuario-card">
+      <div class="card-header">
+        <h3 class="usuario-nombre">{{ usuario.nombreCompleto }}</h3>
+        <span [class]="obtenerClaseEstado(usuario.estado)">{{ usuario.estado | uppercase }}</span>
+      </div>
+
+      <p class="rol-text">**Rol:** {{ usuario.nombre_rol }}</p>
+      
+      <hr class="card-divider">
+
+      <div class="card-content">
+        <div class="content-item">
+          <span class="label">📧 Correo:</span>
+          <span class="value-highlight">{{ usuario.correo }}</span>
+        </div>
+        <div class="content-item">
+          <span class="label">🔑 ID Usuario:</span>
+          <span>{{ usuario.id_usuario }}</span>
+        </div>
+        <div class="content-item">
+          <span class="label">📅 Registro:</span>
+          <span>{{ usuario.fecha_creacion | date: 'dd/MM/yyyy' }}</span>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <button class="btn-action btn-edit" (click)="iniciarEdicion(usuario)">📝 Editar</button>
+        </div>
+    </div>
+  </div>
+</div>

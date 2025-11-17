@@ -1,1 +1,135 @@
-<p>muestreo-suelo works!</p>
+<div class="suelo-container">
+    
+    <header class="header">
+        <h2>🔬 Registro y Gestión de Muestreos de Suelo</h2>
+        <button (click)="gestionarVisibilidadFormulario()" class="btn-primary">
+            {{ mostrarFormulario ? 'Ocultar Formulario' : 'Registrar Nuevo Muestreo' }}
+        </button>
+    </header>
+    
+    <hr>
+    
+    <div *ngIf="mostrarFormulario" class="card-form" id="muestreoFormSection">
+        <form [formGroup]="muestreoForm" (ngSubmit)="registrarMuestreo()">
+            
+            <h3 class="form-title">
+                {{ editandoMuestreoId ? '📝 Editando Muestreo ID: ' + editandoMuestreoId : 'Nuevo Muestreo de Suelo' }}
+            </h3>
+            
+            <div class="form-grid-contexto">
+                
+                <div class="form-group">
+                    <label for="id_subparcela">Subparcela *</label>
+                    <select id="id_subparcela" formControlName="id_subparcela" required>
+                        <option value="" disabled selected>Seleccione Subparcela</option>
+                        <option *ngFor="let p of subparcelas" [value]="p.id_subparcela">
+                            {{ p.nombre }} - ({{ p.ubicacion }})
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="profundidad_inicial">Profundidad Inicial (cm) *</label>
+                    <input id="profundidad_inicial" type="number" formControlName="profundidad_inicial" step="0.01" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="profundidad_final">Profundidad Final (cm) *</label>
+                    <input id="profundidad_final" type="number" formControlName="profundidad_final" step="0.01" min="0" required>
+                </div>
+            </div>
+
+            <div *ngIf="muestreoForm.errors?.['profundidadInvalida'] && muestreoForm.touched" class="error-msg full-width validation-error-box">
+                ⚠️ **Error de Profundidad:** La profundidad final debe ser estrictamente mayor que la profundidad inicial.
+            </div>
+
+            <hr>
+            
+            <h3 class="form-title">Características Físicas y Tipo de Muestra</h3>
+
+            <div class="form-grid-atributos">
+                
+                <div class="form-group">
+                    <label for="textura">Textura *</label>
+                    <select id="textura" formControlName="textura" required>
+                        <option value="" disabled selected>Seleccione textura</option>
+                        <option *ngFor="let t of texturas" [value]="t">{{ t }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="color_munsell">Color Munsell (Código) *</label>
+                    <input id="color_munsell" type="text" formControlName="color_munsell" required placeholder="Ej: 10YR 3/3">
+                </div>
+
+                <div class="form-group">
+                    <label for="humedad">Humedad *</label>
+                    <select id="humedad" formControlName="humedad" required>
+                        <option value="" disabled selected>Seleccione humedad</option>
+                        <option *ngFor="let h of humedades" [value]="h">{{ h }}</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tipo_muestra">Tipo de Muestra *</label>
+                    <select id="tipo_muestra" formControlName="tipo_muestra" required>
+                        <option value="" disabled selected>Seleccione tipo de muestra</option>
+                        <option *ngFor="let tm of tiposMuestra" [value]="tm">{{ tm }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="observaciones">Observaciones</label>
+                <textarea id="observaciones" formControlName="observaciones" rows="3"></textarea>
+            </div>
+            
+            <div class="form-footer">
+                <button type="submit" class="btn-submit" [disabled]="muestreoForm.invalid">
+                    {{ editandoMuestreoId ? '💾 Guardar Cambios' : '💾 Registrar Muestreo' }}
+                </button>
+                <button type="button" (click)="resetFormulario()" class="btn-secondary btn-cancel">
+                    {{ editandoMuestreoId ? 'Cancelar Edición' : 'Limpiar Formulario' }}
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <hr>
+    
+    <div class="muestreos-grid">
+        <div *ngIf="muestreos.length === 0" class="no-data">
+            <p>No hay muestreos de suelo registrados.</p>
+        </div>
+
+        <div *ngFor="let muestreo of muestreos" class="muestreo-card">
+            <div class="card-header-muestreo">
+                <h3 class="muestreo-id">ID Muestreo: {{ muestreo.id_muestreo_suelo }}</h3>
+                <span class="subparcela-badge">Subparcela: {{ obtenerNombreSubparcela(muestreo.id_subparcela) }}</span>
+            </div>
+
+            <div class="card-content-muestreo">
+                <div class="content-item">
+                    <span class="label">Profundidad:</span>
+                    <span>{{ muestreo.profundidad_inicial }} - {{ muestreo.profundidad_final }} cm</span>
+                </div>
+                <div class="content-item">
+                    <span class="label">Textura / Color:</span>
+                    <span>{{ muestreo.textura }} ({{ muestreo.color_munsell }})</span>
+                </div>
+                <div class="content-item">
+                    <span class="label">Humedad / Tipo:</span>
+                    <span>{{ muestreo.humedad }} / {{ muestreo.tipo_muestra }}</span>
+                </div>
+            </div>
+
+            <p class="observaciones-prev">
+                **Obs:** {{ muestreo.observaciones || 'Sin observaciones.' }}
+            </p>
+
+            <div class="card-footer-muestreo">
+                <button class="btn-action btn-edit" (click)="iniciarEdicion(muestreo)">📝 Editar</button>
+            </div>
+        </div>
+    </div>
+</div>

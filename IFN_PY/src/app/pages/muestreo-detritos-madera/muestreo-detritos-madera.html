@@ -1,1 +1,97 @@
-<p>muestreo-detritos-madera works!</p>
+<div class="detritos-container">
+    <header class="header">
+        <h2>🪵 Registro de Detritos Leñosos de Madera (DLM)</h2>
+    </header>
+
+    <div class="card-form">
+        <form [formGroup]="detritosForm" (ngSubmit)="registrarMuestreo()">
+            
+            <h3 class="form-title">Contexto del Muestreo</h3>
+            <div class="form-grid-contexto">
+                
+                <div class="form-group">
+                    <label for="id_subparcela">Subparcela *</label>
+                    <select id="id_subparcela" formControlName="id_subparcela" required>
+                        <option value="" disabled selected>Seleccione Subparcela</option>
+                        <option *ngFor="let p of subparcelas" [value]="p.id_subparcela">
+                            {{ p.nombre }} - ({{ p.ubicacion }})
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="detritos-section">
+                <h3 class="form-title">Detalles de Detritos Encontrados</h3>
+                
+                <div formArrayName="detritos" class="detritos-list">
+                    <div *ngFor="let detritoForm of detritos.controls; let i = index" [formGroupName]="i" class="detrito-card">
+                        
+                        <div class="detrito-header">
+                            <h4>Detrito #{{ i + 1 }}</h4>
+                            <button type="button" (click)="removerDetrito(i)" class="btn-remove" [disabled]="detritos.length === 1">
+                                Eliminar
+                            </button>
+                        </div>
+
+                        <div class="form-grid-detrito">
+                            
+                            <div class="form-group">
+                                <label for="tipo_elemento-{{i}}">Tipo de Elemento *</label>
+                                <select id="tipo_elemento-{{i}}" formControlName="tipo_elemento" required>
+                                    <option value="" disabled selected>Seleccione tipo</option>
+                                    <option *ngFor="let t of tiposElemento" [value]="t">{{ t }}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="diametro-{{i}}">Diámetro (cm) *</label>
+                                <input id="diametro-{{i}}" type="number" formControlName="diametro" step="0.01" min="0" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="longitud-{{i}}">Longitud (m) *</label>
+                                <input id="longitud-{{i}}" type="number" formControlName="longitud" step="0.01" min="0" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="estado_descomposicion-{{i}}">Estado de Descomposición *</label>
+                                <select id="estado_descomposicion-{{i}}" formControlName="estado_descomposicion" required>
+                                    <option value="" disabled selected>Seleccione estado</option>
+                                    <option *ngFor="let e of estadosDescomposicion" [value]="e">{{ e }}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="posicion-{{i}}">Posición *</label>
+                                <select id="posicion-{{i}}" formControlName="posicion" required>
+                                    <option value="" disabled selected>Seleccione posición</option>
+                                    <option *ngFor="let p of posiciones" [value]="p">{{ p }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="obs_detrito-{{i}}">Observaciones Específicas del Detrito</label>
+                            <textarea id="obs_detrito-{{i}}" formControlName="observaciones" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" (click)="agregarDetrito()" class="btn-secondary add-detrito-btn">
+                    ➕ Añadir otro Detrito
+                </button>
+            </div>
+
+            <div class="form-footer">
+                <button type="submit" class="btn-submit" [disabled]="detritosForm.invalid">
+                    💾 Registrar Muestreo de Detritos
+                </button>
+                <button type="button" (click)="resetFormulario()" class="btn-secondary btn-cancel">
+                    Limpiar Formulario
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,255 @@
+@import '../equipos/equipos.css'; 
+
+
+/* ===================================================== */
+/* 2. LAYOUT Y TIPOGRAFÍA BASE */
+/* ===================================================== */
+
+.suelo-container {
+    padding: 30px;
+    background-color: var(--gray-50);
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.header h2 {
+    color: var(--orange-700);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.card-form {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+}
+
+.form-title {
+    color: var(--orange-600);
+    margin: 20px 0 15px 0;
+    border-bottom: 2px solid var(--gray-100);
+    padding-bottom: 8px;
+    font-weight: 600;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--gray-300);
+    margin: 30px 0;
+}
+
+/* ===================================================== */
+/* 3. ESTILOS DE ELEMENTOS DE FORMULARIO Y GRILLAS */
+/* ===================================================== */
+
+/* Grillas para distribución de campos */
+.form-grid-contexto,
+.form-grid-atributos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 10px;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-sm);
+    font-size: 1em;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Estilo de foco usando el color de suelo */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--orange-500);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* Estilo para la validación cruzada de Profundidad */
+.validation-error-box {
+    background-color: var(--danger-light);
+    color: var(--danger-dark);
+    border: 1px solid var(--danger);
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+/* ===================================================== */
+/* 4. ESTILOS DE BOTONES (Comunes y Específicos) */
+/* ===================================================== */
+
+.form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-200);
+}
+
+
+
+/* Botón Cancelar/Limpiar */
+.btn-secondary.btn-cancel {
+    background-color: var(--gray-500);
+    color: var(--white);
+    padding: 12px 25px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.btn-secondary.btn-cancel:hover {
+    background-color: var(--gray-600);
+}
+
+/* Estado Deshabilitado */
+.btn-submit:disabled, .btn-primary:disabled {
+    background-color: var(--gray-400);
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+/* Botón de acción (Editar) */
+.btn-action.btn-edit {
+    background-color: var(--info);
+    color: var(--white);
+    padding: 8px 15px;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-action.btn-edit:hover {
+    background-color: var(--info-dark);
+}
+
+/* ===================================================== */
+/* 5. ESTILOS DE LISTA DE MUESTREOS (CARDS DE GESTIÓN) */
+/* ===================================================== */
+
+.muestreos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.muestreo-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-light);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    /* Borde de color de Suelo */
+    border-left: 6px solid var(--orange-500);
+    transition: transform 0.2s;
+}
+
+.muestreo-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.card-header-muestreo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.muestreo-id {
+    color: var(--orange-700); /* Título del card usa color temático */
+    font-size: 1.2em;
+    font-weight: 700;
+    margin: 0;
+}
+
+.subparcela-badge {
+    background-color: var(--gray-200);
+    color: var(--gray-700);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+.card-content-muestreo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px dashed var(--gray-100);
+    border-bottom: 1px dashed var(--gray-100);
+    margin-bottom: 10px;
+}
+
+.content-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95em;
+}
+
+.label {
+    font-weight: 600;
+    color: var(--gray-600);
+}
+
+.observaciones-prev {
+    font-style: italic;
+    color: var(--gray-500);
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+.card-footer-muestreo {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto; 
+}
+
+.no-data {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    background-color: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    color: var(--gray-500);
+}

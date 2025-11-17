@@ -1,0 +1,197 @@
+@import '../equipos/equipos.css'; 
+
+.detritos-container {
+    padding: 30px;
+    background-color: var(--gray-50);
+    min-height: 100vh;
+}
+
+.header h2 {
+    color: var(--brown-800); /* Nuevo color para detritos: marrón/tierra */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.card-form {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+}
+
+.form-title {
+    color: var(--brown-600);
+    margin: 20px 0 15px 0;
+    border-bottom: 2px solid var(--gray-100);
+    padding-bottom: 8px;
+    font-weight: 600;
+}
+
+/* Grillas específicas */
+.form-grid-contexto {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: var(--gray-700);
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 10px;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-sm);
+    font-size: 1em;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--brown-500);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(var(--brown-rgb), 0.2);
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--gray-300);
+    margin: 30px 0;
+}
+
+/* ----------------------------------- */
+/* Estilos de Detritos (FormArray) */
+/* ----------------------------------- */
+
+.detritos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.detrito-card {
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius);
+    padding: 20px;
+    background-color: var(--white); /* Fondo blanco para destacar sobre el gris del container */
+    box-shadow: var(--shadow-sm);
+}
+
+.detrito-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed var(--gray-200);
+    padding-bottom: 10px;
+}
+
+.detrito-header h4 {
+    color: var(--brown-700);
+    margin: 0;
+}
+
+.btn-remove {
+    background-color: var(--danger);
+    color: var(--white);
+    padding: 5px 10px;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s;
+}
+
+.btn-remove:hover {
+    background-color: var(--danger-dark);
+}
+
+.btn-remove:disabled {
+    background-color: var(--gray-400);
+    cursor: not-allowed;
+}
+
+.form-grid-detrito {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.add-detrito-btn {
+    background-color: var(--orange-500); /* Usando un color más terroso/naranja */
+    color: var(--white);
+    padding: 10px 15px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+    width: fit-content;
+}
+
+.add-detrito-btn:hover {
+    background-color: var(--orange-600);
+}
+
+
+/* ----------------------------------- */
+/* Pie de Formulario */
+/* ----------------------------------- */
+
+.form-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-300);
+}
+
+.btn-submit {
+    background-color: var(--success);
+    color: var(--white);
+    padding: 12px 25px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    background-color: var(--success-dark);
+}
+
+.btn-submit:disabled {
+    background-color: var(--gray-400);
+    cursor: not-allowed;
+}
+
+.btn-cancel {
+    background-color: var(--gray-500);
+    color: var(--white);
+    margin-left: 10px;
+}
+
+.btn-cancel:hover {
+    background-color: var(--gray-600);
+}

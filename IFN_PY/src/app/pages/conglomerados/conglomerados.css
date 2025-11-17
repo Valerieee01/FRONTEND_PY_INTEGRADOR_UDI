@@ -1,179 +1,282 @@
-/* Contenedor de filtros */
-.filters {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 15px;
+@import '../equipos/equipos.css'; 
+
+
+/* ===================================================== */
+/* 2. ESTRUCTURA Y LAYOUT PRINCIPAL */
+/* ===================================================== */
+
+.dashboard-container {
+    padding: 30px;
+    background-color: var(--gray-50);
+    min-height: 100vh;
 }
 
-.filters input {
-  padding: 10px 12px;
-  border: 1px solid var(--green-300);
-  border-radius: var(--radius);
-  font-size: 14px;
-  width: 220px;
-  transition: border-color var(--transition), box-shadow var(--transition);
+.dashboard-header h1 {
+    color: var(--primary-blue);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    margin-bottom: 25px;
 }
 
-.filters input:focus {
-  border-color: var(--green-600);
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
-  outline: none;
+.main-layout {
+    display: grid;
+    grid-template-columns: 400px 1fr; /* Columna izquierda fija, derecha flexible */
+    gap: 30px;
 }
 
-/* Contenedor de tabla */
-.table-container {
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: 20px;
-  overflow-x: auto;
-  box-shadow: var(--shadow-light);
+/* ===================================================== */
+/* 3. BARRA LATERAL (Filtros y Lista) */
+/* ===================================================== */
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-/* Título de tabla */
-.table-container h2 {
-  color: var(--green-800);
-  margin-bottom: 15px;
-  font-size: 1.5rem;
-  font-weight: 700;
+.filter-card, .list-container, .detail-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
 }
 
-/* Tabla */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
+.filter-card h3, .list-container h3, .detail-card h2 {
+    color: var(--gray-700);
+    border-bottom: 1px solid var(--gray-200);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-weight: 600;
 }
 
-thead {
-  background-color: var(--green-700);
-  color: var(--white);
+/* --- Formulario de Filtros --- */
+.form-group label {
+    font-weight: 500;
+    color: var(--gray-700);
+    margin-bottom: 5px;
+    display: block;
+    margin-top: 10px;
 }
 
-th, td {
-  padding: 12px 10px;
-  border-bottom: 1px solid var(--gray-200);
-  text-align: left;
+.filter-card input[type="text"], .input-range input {
+    padding: 8px;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-sm);
+    box-sizing: border-box; /* Asegura que padding no afecte el width total */
 }
 
-tr:hover {
-  background-color: var(--green-50);
+.filter-card input[type="text"] {
+    width: 100%;
 }
 
-/* Botones dentro de la tabla */
-.table-actions {
-  margin-top: 15px;
-  display: flex;
-  gap: 10px;
+.altitud-group label {
+    margin-top: 15px;
 }
 
-.table-actions button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  color: var(--white);
-  transition: background-color var(--transition);
+.input-range {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.btn-pdf {
-  background-color: var(--info);
+.input-range input {
+    flex-grow: 1;
 }
 
-.btn-pdf:hover {
-  background-color: #026aa3;
+.filter-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
 }
 
-.btn-delete {
-  background-color: var(--danger);
+/* Estilos de Botones */
+.btn-primary.btn-filter, .btn-secondary.btn-clear {
+    padding: 10px 15px;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    flex-grow: 1;
+    transition: background-color 0.3s;
 }
 
-.btn-delete:hover {
-  background-color: #a93226;
+.btn-primary.btn-filter {
+    background-color: var(--primary-blue);
+    color: var(--white);
 }
 
-.btn-view {
-  background-color: var(--green-600);
+.btn-primary.btn-filter:hover:not(:disabled) {
+    background-color: var(--primary-dark);
 }
 
-.btn-view:hover {
-  background-color: var(--green-700);
+.btn-secondary.btn-clear {
+    background-color: var(--gray-500);
+    color: var(--white);
 }
 
-/* Fondo del modal */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0,0,0,0.5);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
+.btn-secondary.btn-clear:hover {
+    background-color: var(--secondary-gray);
 }
 
-/* Modal en sí */
-.modal {
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: 25px 30px;
-  width: min(600px, 90%);
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: var(--shadow-medium);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  position: relative;
+.btn-primary.btn-filter:disabled {
+    background-color: var(--gray-300);
+    cursor: not-allowed;
 }
 
-/* Título del modal */
-.modal h3 {
-  color: var(--green-800);
-  margin: 0 0 10px 0;
-  font-size: 1.4rem;
-  font-weight: 700;
+
+/* --- Lista de Conglomerados --- */
+.conglomerado-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-/* Botón de cerrar modal */
-.modal-close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: transparent;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: var(--gray-700);
-  font-weight: 700;
+.conglomerado-list li {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--gray-100);
+    cursor: pointer;
+    transition: background-color 0.2s, border-left 0.2s;
+    display: flex;
+    flex-direction: column;
 }
 
-.modal-close:hover {
-  color: var(--green-700);
+.conglomerado-list li:last-child {
+    border-bottom: none;
 }
 
-/* Contenido dentro del modal */
-.modal-content p {
-  margin: 5px 0;
-  line-height: 1.5;
+.conglomerado-list li:hover {
+    background-color: var(--gray-50);
 }
 
-.modal-content span {
-  font-weight: 600;
-  color: var(--green-800);
+.conglomerado-list li.selected {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    border-left: 5px solid var(--primary-dark);
 }
 
-.btn-view {
-  background-color: var(--green-600);
-  color: var(--white);
-  padding: 8px 14px;
-  border-radius: var(--radius);
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: background-color var(--transition);
+.conglomerado-list li.selected .list-detail {
+    color: var(--gray-100);
 }
 
-.btn-view:hover {
-  background-color: var(--green-700);
+.list-code {
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+.list-detail {
+    font-size: 0.85em;
+    color: var(--gray-500);
+}
+
+.conglomerado-list li.selected .list-detail {
+    color: var(--gray-100); /* Sobreescribe el color para la selección */
+}
+
+.no-data {
+    text-align: center;
+    padding: 20px 0;
+    color: var(--gray-500);
+}
+
+/* ===================================================== */
+/* 4. CONTENIDO DETALLADO (Derecha) */
+/* ===================================================== */
+
+.placeholder-card {
+    text-align: center;
+    padding: 80px 20px;
+    border: 2px dashed var(--gray-300);
+    border-radius: var(--radius);
+    background-color: var(--gray-100);
+    height: 100%;
+}
+
+.placeholder-card h2 {
+    color: var(--primary-blue);
+}
+
+.placeholder-card p {
+    color: var(--gray-600);
+}
+
+.detail-card {
+    min-height: 400px;
+}
+
+.detail-title {
+    color: var(--primary-blue);
+    margin-top: 0;
+}
+
+.conglomerado-data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.data-item {
+    padding: 10px;
+    background-color: var(--gray-50);
+    border-radius: var(--radius-sm);
+}
+
+.data-label {
+    font-weight: 600;
+    color: var(--primary-dark);
+    display: block;
+    font-size: 0.9em;
+}
+
+.data-value {
+    font-size: 1em;
+    color: var(--gray-700);
+}
+
+.observaciones-box {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+}
+
+.observaciones-box p {
+    margin: 5px 0 0 0;
+    font-style: italic;
+    color: var(--gray-600);
+}
+
+/* --- Tabla de Subparcelas --- */
+
+.subparcela-title {
+    color: var(--secondary-gray);
+    margin-top: 30px;
+    border-bottom: 1px dashed var(--gray-200);
+    padding-bottom: 10px;
+}
+
+.subparcela-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.subparcela-table thead tr {
+    background-color: var(--gray-100);
+    color: var(--gray-700);
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid var(--gray-200);
+}
+
+.subparcela-table th, .subparcela-table td {
+    padding: 12px 15px;
+}
+
+.subparcela-table tbody tr {
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.subparcela-table tbody tr:last-of-type {
+    border-bottom: 2px solid var(--gray-300);
 }

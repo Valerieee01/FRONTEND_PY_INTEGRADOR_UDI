@@ -8,11 +8,11 @@ import { Equipos } from './pages/equipos/equipos';
 import { Landing } from './pages/landing/landing';
 import { MuestreoBotanico } from './pages/muestreo-botanico/muestreo-botanico';
 import { MuestreoDetritosMadera } from './pages/muestreo-detritos-madera/muestreo-detritos-madera';
-import { MuestreoSuelo } from './pages/muestreo-suelo/muestreo-suelo';
+import { MuestreoSueloComponent } from './pages/muestreo-suelo/muestreo-suelo';
 import { Personas } from './pages/personas/personas';
-import { Subparcelas } from './pages/subparcelas/subparcelas';
 import { PublicLayout } from './Layout/public-layout/public-layout';
 import { AdminLayout } from './Layout/admin-layout/admin-layout';
+import { Dashboard } from './pages/dashboard/dashboard';
 
 
 
@@ -35,15 +35,15 @@ export const routes: Routes = [
     path: '',
     component: AdminLayout,
     children: [
+      { path: 'Inicio', component: Dashboard },
       { path: 'Conglomerados', component: Conglomerados },
       { path: 'Usuarios', component: Usuarios },
       { path: 'Empleados', component: Empleados },
       { path: 'Equipos', component: Equipos },
       { path: 'MuestreoBotanico', component: MuestreoBotanico },
       { path: 'MuestreoDetritosMadera', component: MuestreoDetritosMadera },
-      { path: 'MuestreoSuelo', component: MuestreoSuelo },
-      { path: 'Personas', component: Personas },
-      { path: 'Subparcelas', component: Subparcelas }
+      { path: 'MuestreoSuelo', component: MuestreoSueloComponent },
+      { path: 'Personas', component: Personas }
     ]
   }
 ];
